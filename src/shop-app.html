@@ -203,6 +203,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color: var(--app-primary-color);
         color: white;
         text-transform: uppercase;
+        cursor: pointer;
       }
 
       /* small screen */
@@ -315,7 +316,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <footer>
       <a href="https://www.polymer-project.org/1.0/toolbox/"></a>
-      <div class="demo-label">맨뒤</div>
+      <div class="demo-label" on-tap="handleTap">맨뒤</div>
     </footer>
 
     <!-- a11y announcer -->
@@ -331,6 +332,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer({
 
       is: 'shop-app',
+
+      handleTap: function() {
+        alert('맨뒤라고');
+      },
 
       properties: {
 
