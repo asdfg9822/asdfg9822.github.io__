@@ -155,7 +155,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <h1>[[item.title]]</h1>
         <div class="price">[[_formatPrice(item.price)]]</div>
         <div class="pickers">
-          <shop-select>
+            <shop-md-decorator aria-hidden="true">
+              <shop-underline></shop-underline>
+            </shop-md-decorator>
+<!--          <shop-select>
             <label id="sizeLabel" prefix>Size</label>
             <select id="sizeSelect" aria-labelledby="sizeLabel">
               <option value="XS">XS</option>
@@ -164,10 +167,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <option value="L">L</option>
               <option value="XL">XL</option>
             </select>
-            <shop-md-decorator aria-hidden="true">
-              <shop-underline></shop-underline>
-            </shop-md-decorator>
           </shop-select>
+          <shop-md-decorator aria-hidden="true">
+            <shop-underline></shop-underline>
+          </shop-md-decorator>
           <shop-select>
             <label id="quantityLabel" prefix>Quantity</label>
             <select id="quantitySelect" aria-labelledby="quantityLabel">
@@ -180,14 +183,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <shop-md-decorator aria-hidden="true">
               <shop-underline></shop-underline>
             </shop-md-decorator>
-          </shop-select>
+          </shop-select>-->
         </div>
         <div class="description">
-          <h2>Description</h2>
+          <h2>경력</h2>
+          <p id="career"></p>
+        </div>
+        <div class="description">
+          <h2>방송</h2>
+          <p id="broadcast"></p>
+        </div>
+        <div class="description">
+          <h2>앨범</h2>
           <p id="desc"></p>
         </div>
         <shop-button responsive>
-          <button on-tap="_addToCart" aria-label="Add this item to cart">Add to Cart</button>
+          <button on-tap="_addToCart" aria-label="Add this item to cart">노래 듣기</button>
         </shop-button>
       </div>
     </div>
@@ -238,6 +249,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             // The item description contains escaped HTML (e.g. "&lt;br&gt;"), so we need to
             // unescape it ("<br>") and set it as innerHTML.
             var text = item ? item.description : '';
+            var career = item? item.career : '';
+            var broadcast = item? item.broadcast : '';
+
+            this.$.broadcast.innerHTML = this._unescapeText(broadcast);
+            this.$.career.innerHTML = this._unescapeText(career);
             this.$.desc.innerHTML = this._unescapeText(text);
 
             // Reset the select menus.
