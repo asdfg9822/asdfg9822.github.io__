@@ -17,6 +17,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-icons/hardware-icons.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="shop-category-data.html">
 <!-- Since 'home' is the default route, eagerly load it. -->
@@ -67,6 +68,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-size: 16px;
         font-weight: 600;
         letter-spacing: 0.3em;
+        margin-right: -0.3em;
         color: var(--app-primary-color);
         text-decoration: none;
         /* required for IE 11, so this <a> can receive pointer events */
@@ -270,7 +272,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="logo" main-title><a href="/" aria-label="SHOP Home">MANAP</a></div>
         <div class="cart-btn-container">
           <a href="/cart" tabindex="-1">
-            <paper-icon-button icon="shopping-cart" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
+            <paper-icon-button icon="hardware:headset-mic" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
           </a>
           <div class="cart-badge" aria-hidden="true" hidden$="[[!numItems]]">[[numItems]]</div>
         </div>
