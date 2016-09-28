@@ -18,6 +18,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-icons/hardware-icons.html">
+<link rel="import" href="../bower_components/paper-badge/paper-badge.html">
+<link rel="import" href="../bower_components/iron-icons/av-icons.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="shop-category-data.html">
 <!-- Since 'home' is the default route, eagerly load it. -->
@@ -148,6 +150,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         @apply(--layout-center-center);
       }
 
+      .music-badge {
+        position: absolute;
+        top: -2px;
+        right: 0;
+        width: 20px;
+        height: 20px;
+        background-color: var(--app-accent-color);
+        border-radius: 50%;
+        color: white;
+        font-size: 12px;
+        font-weight: 500;
+        pointer-events: none;
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+      }
+
       .drawer-list {
         margin: 0 20px;
       }
@@ -197,6 +215,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         text-decoration: underline;
       }
 
+      footer > app-toolbar {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 40px;
+        background-color: #ffffff;
+        border-top: 1px solid rgba(0,0,0,.15);
+      }
+
+      .playbox-icon {
+        margin-left : 30px;
+      }
+
       .demo-label {
         box-sizing: border-box;
         width: 120px;
@@ -221,6 +253,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         :host([page=detail]) .menu-btn {
           display: none;
         }
+      }
+
+      .red {
+        --paper-badge-background: var(--paper-red-300);
+      }
+      .blue {
+        --paper-badge-background: var(--paper-light-blue-300);
       }
 
     </style>
@@ -271,10 +310,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
         <div class="logo" main-title><a href="/" aria-label="SHOP Home">MANAP</a></div>
         <div class="cart-btn-container">
-          <a href="/cart" tabindex="-1">
-            <paper-icon-button icon="hardware:headset-mic" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
-          </a>
-          <div class="cart-badge" aria-hidden="true" hidden$="[[!numItems]]">[[numItems]]</div>
+          <!--<a href="/cart" tabindex="-1">-->
+            <!--<paper-icon-button icon="hardware:headset-mic" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>-->
+            <paper-icon-button id="music" icon="hardware:headset-mic" on-tap="togglePlaybox" alt="inbox"></paper-icon-button>
+          <!--</a>-->
+          <div class="music-badge" aria-hidden="true" hidden$="[[!numItems]]">[[numItems]]</div>
         </div>
       </app-toolbar>
 
@@ -322,6 +362,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <footer>
       <a href="https://www.polymer-project.org/1.0/toolbox/"></a>
       <div class="demo-label" on-tap="handleTap">맨뒤</div>
+
+      <app-toolbar hidden$="{{playbox}}">
+        <paper-icon-button icon="av:skip-previous" class="playbox-icon"></paper-icon-button>
+        <paper-icon-button id="playBtn" icon="av:play-arrow" hidden$="{{playing}}" on-tap="togglePlay"></paper-icon-button>
+        <paper-icon-button id="pauseBtn" icon="av:pause" hidden$="{{!playing}}" on-tap="togglePlay"></paper-icon-button>
+        <paper-icon-button icon="av:skip-next"></paper-icon-button>
+        <div>Music name</div>
+        <paper-icon-button icon="search"></paper-icon-button>
+      </app-toolbar>
     </footer>
 
     <!-- a11y announcer -->
@@ -365,6 +414,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         _shouldRenderDrawer: {
           computed: '_computeShouldRenderDrawer(smallScreen, loadComplete)'
+        },
+
+        playing: {
+          type: Boolean,
+          notify: true,
+          value: false
+        },
+
+        playbox: {
+          type: Boolean,
+          notify: true,
+          value: true
         }
       },
 
@@ -467,6 +528,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.drawerOpened = !this.drawerOpened;
       },
 
+      togglePlay: function() {
+        this.playing = !this.playing;
+      },
+
+      togglePlaybox: function() {
+        this.playbox = !this.playbox;
+      },
+
       // Elements in the app can notify section changes.
       // Response by a11y announcing the section and syncronizing the category.
       _onChangeSection: function(event) {
@@ -486,7 +555,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
         this.$.cart.addItem(event.detail);
         this._cartModal.open();
-        this._announce('Item added to the cart');
+        this._announce('Item added to the List');
+
+        this.
       },
 
       _onSetCartItem: function(event) {
