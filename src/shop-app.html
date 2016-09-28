@@ -24,6 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="shop-category-data.html">
 <!-- Since 'home' is the default route, eagerly load it. -->
 <link rel="import" href="shop-home.html">
+<link rel="import" href="manap-playbox.html">
 <dom-module id="shop-app">
 
   <template>
@@ -214,20 +215,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         text-decoration: underline;
       }
 
-      footer > app-toolbar {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        height: 40px;
-        background-color: #ffffff;
-        border-top: 1px solid rgba(0,0,0,.15);
-      }
-
-      .playbox-icon {
-        margin-left : 30px;
-      }
-
       .demo-label {
         box-sizing: border-box;
         width: 120px;
@@ -252,13 +239,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         :host([page=detail]) .menu-btn {
           display: none;
         }
-      }
-
-      .red {
-        --paper-badge-background: var(--paper-red-300);
-      }
-      .blue {
-        --paper-badge-background: var(--paper-light-blue-300);
       }
 
     </style>
@@ -361,20 +341,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <footer>
       <a href="https://www.polymer-project.org/1.0/toolbox/"></a>
       <div class="demo-label" on-tap="handleTap">맨뒤</div>
-
-      <app-toolbar hidden$="{{playbox}}">
-        <paper-icon-button icon="av:skip-previous" class="playbox-icon"></paper-icon-button>
-        <paper-icon-button id="playBtn" icon="av:play-arrow" hidden$="{{playing}}" on-tap="togglePlay"></paper-icon-button>
-        <paper-icon-button id="pauseBtn" icon="av:pause" hidden$="{{!playing}}" on-tap="togglePlay"></paper-icon-button>
-        <paper-icon-button icon="av:skip-next"></paper-icon-button>
-        <div>Music name</div>
-        <paper-icon-button icon="search"></paper-icon-button>
-      </app-toolbar>
+      <manap-playbox id="playbox" hidden$="{{playbox}}"></manap-playbox>
     </footer>
 
     <!-- a11y announcer -->
     <div class="announcer" aria-live="assertive">[[_a11yLabel]]</div>
-
   </template>
 
   <script>
@@ -415,16 +386,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           computed: '_computeShouldRenderDrawer(smallScreen, loadComplete)'
         },
 
-        playing: {
-          type: Boolean,
-          notify: true,
-          value: false
-        },
-
         playbox: {
           type: Boolean,
           notify: true,
-          value: true
+          value: false
         }
       },
 
@@ -527,12 +492,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.drawerOpened = !this.drawerOpened;
       },
 
-      togglePlay: function() {
-        this.playing = !this.playing;
-      },
 
       togglePlaybox: function() {
-        this.playbox = !this.playbox;
+        //this.playbox = !this.playbox;
+
+        this.$.playbox.animate();
       },
 
       // Elements in the app can notify section changes.
@@ -614,6 +578,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
     });
+
+
+
 
   </script>
 
