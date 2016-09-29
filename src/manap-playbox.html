@@ -27,22 +27,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 bottom: 0;
                 right: 0;
                 width: 100%;
-                height: 50px;
+                height: 64px;
                 background-color: #ffffff;
                 border-top: 1px solid rgba(0,0,0,.15);
             }
 
-            .playbox-icon {
-                margin-left : 30px;
+            .playbox-icon[pconly] {
+                margin-left : 28px;
+            }
+
+            :host([hidden]), [hidden] {
+                display: none !important;
+            }
+
+            @media (max-width: 767px) {
+
+                app-toolbar {
+                    /*@apply(--layout-fixed-bottom);*/
+                    background-color: #ffffff;
+                    height: 64px;
+                    z-index: 10;
+                }
+
+                paper-icon-button[pconly] {
+                    display: none;
+                }
+
+                .playbox-icon {
+                    margin-left : 28px;
+                }
             }
 
         </style>
 
         <app-toolbar>
-            <paper-icon-button icon="av:skip-previous" class="playbox-icon"></paper-icon-button>
-            <paper-icon-button icon="av:play-arrow" hidden$="{{playing}}" on-tap="_togglePlay"></paper-icon-button>
-            <paper-icon-button icon="av:pause" hidden$="{{!playing}}" on-tap="_togglePlay"></paper-icon-button>
-            <paper-icon-button icon="av:skip-next"></paper-icon-button>
+            <paper-icon-button icon="av:skip-previous" class="playbox-icon" pconly></paper-icon-button >
+            <paper-icon-button icon="av:play-arrow" class="playbox-icon" on-tap="_togglePlay" hidden$="{{!playing}}" ></paper-icon-button>
+            <paper-icon-button icon="av:pause" class="playbox-icon" on-tap="_togglePlay" hidden$="{{playing}}" ></paper-icon-button>
+            <paper-icon-button icon="av:skip-next" pconly></paper-icon-button>
             <div>Music name</div>
             <paper-icon-button icon="search"></paper-icon-button>
         </app-toolbar>
@@ -60,6 +82,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 Polymer.NeonSharedElementAnimatableBehavior
             ],
 
+            attributeChanged: function (name) {
+                if (name === 'hidden') {
+                    console.log("ok");
+                }
+            },
+
             properties: {
                 playing: {
                     type: Boolean,
@@ -76,16 +104,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         }
                     }
                 }
-
             },
 
             animate: function() {
-                console.log("ok");
+                console.log(this.playing);
                 this.playAnimation();
             },
 
             _togglePlay: function() {
-                this.playing = !this.playing;
+                console.log(!this.playing);
+                return this.playing = !this.playing;
             }
 
         });

@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="shop-button.html">
+<link rel="import" href="manap-button.html">
 <link rel="import" href="shop-category-data.html">
 <link rel="import" href="shop-common-styles.html">
 <link rel="import" href="shop-image.html">
@@ -21,7 +22,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <template>
 
-    <style include="shop-common-styles shop-button shop-select">
+    <style include="shop-common-styles shop-button manap-button shop-select">
 
       :host {
         display: block;
@@ -197,9 +198,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <h2>앨범</h2>
           <p id="desc"></p>
         </div>
-        <shop-button responsive>
+        <manap-button>
           <button on-tap="_addToCart" aria-label="음악이 재생 목록에 추가되었습니다.">노래 듣기</button>
-        </shop-button>
+        </manap-button>
       </div>
     </div>
 
