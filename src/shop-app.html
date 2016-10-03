@@ -289,10 +289,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
         <div class="logo" main-title><a href="/" aria-label="SHOP Home">MANAP</a></div>
         <div class="cart-btn-container">
-          <!--<a href="/cart" tabindex="-1">-->
-            <!--<paper-icon-button icon="hardware:headset-mic" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>-->
-            <paper-icon-button id="music" icon="hardware:headset-mic" on-tap="togglePlaybox" alt="inbox"></paper-icon-button>
-          <!--</a>-->
+          <a href="/cart" tabindex="-1">
+            <paper-icon-button icon="hardware:headset-mic" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
+            <!--<paper-icon-button id="music" icon="hardware:headset-mic" on-tap="togglePlaybox" alt="inbox"></paper-icon-button>-->
+          </a>
           <div class="music-badge" aria-hidden="true" hidden$="[[!numItems]]">[[numItems]]</div>
         </div>
       </app-toolbar>

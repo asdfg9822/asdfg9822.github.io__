@@ -11,14 +11,9 @@ Install [polymer-cli](https://github.com/Polymer/polymer-cli):
 
 
 ##### Setup
-    # Using CLI
-    mkdir shop
-    cd shop
-    polymer init shop
-    
-    # Or cloning direct from GitHub
-    git clone https://github.com/Polymer/shop.git
-    cd shop
+    # Cloning direct from GitHub
+    git clone https://github.com/asdfg9822/asdfg9822.github.io.git
+    cd asdfg9822.github.io
     bower install
 
 ### Start the development server

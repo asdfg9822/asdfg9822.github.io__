@@ -27,7 +27,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 bottom: 0;
                 right: 0;
                 width: 100%;
-                height: 64px;
+                height: 50px;
                 background-color: #ffffff;
                 border-top: 1px solid rgba(0,0,0,.15);
             }
@@ -45,7 +45,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 app-toolbar {
                     /*@apply(--layout-fixed-bottom);*/
                     background-color: #ffffff;
-                    height: 64px;
+                    height: 50px;
                     z-index: 10;
                 }
 
@@ -107,12 +107,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             },
 
             animate: function() {
-                console.log(this.playing);
                 this.playAnimation();
             },
 
             _togglePlay: function() {
-                console.log(!this.playing);
                 return this.playing = !this.playing;
             }
 
