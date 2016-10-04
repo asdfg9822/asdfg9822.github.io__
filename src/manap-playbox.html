@@ -65,7 +65,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <paper-icon-button icon="av:play-arrow" class="playbox-icon" on-tap="_togglePlay" hidden$="{{!playing}}" ></paper-icon-button>
             <paper-icon-button icon="av:pause" class="playbox-icon" on-tap="_togglePlay" hidden$="{{playing}}" ></paper-icon-button>
             <paper-icon-button icon="av:skip-next" pconly></paper-icon-button>
-            <div>Music name</div>
+            <div style="width: 30px;height: 30px;background-color: red;"></div>
+            <div style="vertical-align: middle;margin-left: 11px;line-height: 14px;text-align: left;">
+                <div style="font-size: 16px;margin: 0px;padding: 0px;line-height: 20px;">Dream - Tikkit</div>
+                <div style="color:#999;font-size: 12px;font-weight: 300;">Dream</div>
+            </div>
             <paper-icon-button icon="search"></paper-icon-button>
         </app-toolbar>
     </template>
