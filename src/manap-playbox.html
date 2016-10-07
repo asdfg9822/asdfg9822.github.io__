@@ -40,6 +40,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 display: none !important;
             }
 
+            .cover {
+                width: 30px;
+                height: 30px;
+                background-color: red;
+                margin-left: 11px;
+            }
+
+            .music-info {
+                vertical-align: middle;
+                margin-left: 11px;
+                line-height: 14px;
+                text-align: left;
+            }
+
+            .title {
+                font-size: 16px;
+                margin: 0px;
+                padding: 0px;
+                line-height: 20px;
+            }
+
+            .album {
+                color:#999;
+                font-size: 12px;
+                font-weight: 300;
+            }
+
             @media (max-width: 767px) {
 
                 app-toolbar {
@@ -65,10 +92,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <paper-icon-button icon="av:play-arrow" class="playbox-icon" on-tap="_togglePlay" hidden$="{{!playing}}" ></paper-icon-button>
             <paper-icon-button icon="av:pause" class="playbox-icon" on-tap="_togglePlay" hidden$="{{playing}}" ></paper-icon-button>
             <paper-icon-button icon="av:skip-next" pconly></paper-icon-button>
-            <div style="width: 30px;height: 30px;background-color: red;margin-left: 11px;"></div>
-            <div style="vertical-align: middle;margin-left: 11px;line-height: 14px;text-align: left;">
-                <div style="font-size: 16px;margin: 0px;padding: 0px;line-height: 20px;">Dream - Tikkit</div>
-                <div style="color:#999;font-size: 12px;font-weight: 300;">Dream</div>
+            <div class="cover"></div>
+            <div class="music-info">
+                <div class="title">{{playingMusic.title}}</div>
+                <div class="album">{{playingMusic.album}}</div>
             </div>
             <paper-icon-button icon="search"></paper-icon-button>
         </app-toolbar>
@@ -96,7 +123,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     value: false
                 },
 
-                music: Array
+                music: Array,
+
+                playingMusic: {
+                    type: Object,
+                    value: {
+                        title: 'Dream - Tikkit',
+                        album: 'Dream'
+                    }
+                },
+
+                animationConfig: {
+                    type: Object,
+                    value: function() {
+                        return {
+                            name: 'fade-in-animation',
+                            node: this
+                        }
+                    }
+                }
             },
 
             animate: function() {
