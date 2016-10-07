@@ -1,0 +1,23 @@
+[
+    {
+        "album":"Dream",
+        "title":"Dream",
+        "title":"Tikkit",
+        "coverImage":"/data/music/dream/tikkit.jpg",
+        "music":"/data/music/dream/example.mp3"
+    },
+    {
+        "album":"Dream",
+        "title":"Dream",
+        "title":"Tikkit",
+        "coverImage":"/data/music/dream/tikkit.jpg",
+        "music":"/data/music/dream/example.mp3"
+    },
+    {
+        "album":"Dream",
+        "title":"Dream",
+        "title":"Tikkit",
+        "coverImage":"/data/music/dream/tikkit.jpg",
+        "music":"/data/music/dream/example.mp3"
+    }
+]

@@ -81,9 +81,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             is: 'manap-playbox',
 
             behaviors: [
-                Polymer.NeonAnimationRunnerBehavior,
-                Polymer.NeonAnimationBehavior,
-                Polymer.NeonSharedElementAnimatableBehavior
             ],
 
             attributeChanged: function (name) {
@@ -99,15 +96,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     value: false
                 },
 
-                animationConfig: {
-                    type: Object,
-                    value: function() {
-                        return {
-                            name: 'fade-in-animation',
-                            node: this
-                        }
-                    }
-                }
+                music: Array
             },
 
             animate: function() {
