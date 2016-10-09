@@ -9,14 +9,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/neon-animation/neon-animatable-behavior.html">
-<link rel="import" href="../bower_components/neon-animation/neon-animation-runner-behavior.html">
-<link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
-<link rel="import" href="../bower_components/neon-animation/animations/slide-up-animation.html">
-<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
-<link rel="import" href="../bower_components/neon-animation/animations/fade-in-animation.html">
-<link rel="import" href="../bower_components/neon-animation/animations/slide-from-right-animation.html">
-<link rel="import" href="../bower_components/neon-animation/animations/slide-right-animation.html">
 
 <dom-module id="manap-playbox">
     <template>
@@ -88,16 +80,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </style>
 
         <app-toolbar>
-            <paper-icon-button icon="av:skip-previous" class="playbox-icon" pconly></paper-icon-button >
+            <paper-icon-button icon="av:skip-previous" class="playbox-icon" on-tap="_prevMusic" pconly></paper-icon-button >
             <paper-icon-button icon="av:play-arrow" class="playbox-icon" on-tap="_playPause" hidden$="{{!playing}}" ></paper-icon-button>
             <paper-icon-button icon="av:pause" class="playbox-icon" on-tap="_playPause" hidden$="{{playing}}" ></paper-icon-button>
-            <paper-icon-button icon="av:skip-next" pconly></paper-icon-button>
+            <paper-icon-button icon="av:skip-next" on-tap="_nextMusic" pconly></paper-icon-button>
             <div class="cover"></div>
             <div class="music-info">
                 <div class="title">{{playingMusic.title}}</div>
                 <div class="album">{{playingMusic.album}}</div>
             </div>
-            <audio id="audio" src="{{playingMusic.music}}" autoplay></audio>
+            <audio id="audio" src="{{playingMusic.music}}"></audio>
             <paper-icon-button icon="search"></paper-icon-button>
         </app-toolbar>
     </template>
@@ -121,7 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 playing: {
                     type: Boolean,
                     notify: true,
-                    value: false
+                    value: true
                 },
 
                 music: Array,
@@ -135,16 +127,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         "coverImage":"/data/music/dream/tikkit.jpg",
                         "music":"/data/music/dream/example.mp3"
                     }
-                },
-
-                animationConfig: {
-                    type: Object,
-                    value: function() {
-                        return {
-                            name: 'fade-in-animation',
-                            node: this
-                        }
-                    }
                 }
             },
 
@@ -156,7 +138,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 e.preventDefault();
 
                 var player = this;
-                this.playing = !this.playing;
+                player._togglePlay();
 
                 if ( player.$.audio.paused ) {
                     player.$.audio.play();
@@ -166,9 +148,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             },
 
             _togglePlay: function() {
-                return this.playing = !this.playing;
-            }
+                this.playing = !this.playing;
+            },
 
+            _prevMusic: function() {
+
+            },
+
+            _nextMusic: function() {
+
+            }
         });
     </script>
 </dom-module>
