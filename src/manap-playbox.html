@@ -89,14 +89,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <app-toolbar>
             <paper-icon-button icon="av:skip-previous" class="playbox-icon" pconly></paper-icon-button >
-            <paper-icon-button icon="av:play-arrow" class="playbox-icon" on-tap="_togglePlay" hidden$="{{!playing}}" ></paper-icon-button>
-            <paper-icon-button icon="av:pause" class="playbox-icon" on-tap="_togglePlay" hidden$="{{playing}}" ></paper-icon-button>
+            <paper-icon-button icon="av:play-arrow" class="playbox-icon" on-tap="_playPause" hidden$="{{!playing}}" ></paper-icon-button>
+            <paper-icon-button icon="av:pause" class="playbox-icon" on-tap="_playPause" hidden$="{{playing}}" ></paper-icon-button>
             <paper-icon-button icon="av:skip-next" pconly></paper-icon-button>
             <div class="cover"></div>
             <div class="music-info">
                 <div class="title">{{playingMusic.title}}</div>
                 <div class="album">{{playingMusic.album}}</div>
             </div>
+            <audio id="audio" src="{{playingMusic.music}}" autoplay></audio>
             <paper-icon-button icon="search"></paper-icon-button>
         </app-toolbar>
     </template>
@@ -128,8 +129,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 playingMusic: {
                     type: Object,
                     value: {
-                        title: 'Dream - Tikkit',
-                        album: 'Dream'
+                        "album":"Dream",
+                        "title":"Dream",
+                        "singer":"Tikkit",
+                        "coverImage":"/data/music/dream/tikkit.jpg",
+                        "music":"/data/music/dream/example.mp3"
                     }
                 },
 
@@ -146,6 +150,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             animate: function() {
                 this.playAnimation();
+            },
+
+            _playPause: function(e) {
+                e.preventDefault();
+
+                var player = this;
+                this.playing = !this.playing;
+
+                if ( player.$.audio.paused ) {
+                    player.$.audio.play();
+                } else {
+                    player.$.audio.pause();
+                }
             },
 
             _togglePlay: function() {
