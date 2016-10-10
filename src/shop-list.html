@@ -82,8 +82,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-route
         route="[[route]]"
         pattern="/:category"
-        data="{{routeData}}"></app-route>
+        data="{{routeData}}"
+        tail="{{subroute}}"></app-route>
 
+    <!-- [참고]1. list/artists/{data}가 들어올 경우 data를 subrouteData.part에 담아줌  -->
+    <app-route
+            route="[[subroute]]"
+            pattern="/:part"
+            data="{{subrouteData}}"></app-route>
     <!--
       shop-category-data provides the category data for a given category name.
     -->
@@ -100,17 +106,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <header>
       <h1>[[category.title]]</h1>
-      <span>Singer</span>
-      <span>Dancer</span>
-      <span>Photographer</span>
-      <span>Actor</span>
-      <span>Video Director</span>
+      <a href="/list/artists/singer"><span>Singer</span></a>
+      <a href="/list/artists/dancer"><span>Dancer</span></a>
+      <a href="/list/artists/photographer"><span>Photographer</span></a>
+      <a href="/list/artists/actor"><span>Actor</span></a>
+      <a href="/list/artists/videodirector"><span>Video Director</span></a>
       <br>
       <span>[[_getPluralizedQuantity(category.items.length)]]</span>
     </header>
 
     <ul class="grid" hidden$="[[failure]]">
-      <template is="dom-repeat" items="[[_getListItems(category.items)]]" initial-count="4">
+      <template is="dom-repeat" items="[[_getListItems(category.items)]]" initial-count="4" filter="matchPart">
         <li>
           <a href$="[[_getItemHref(item)]]"><shop-list-item item="[[item]]"></shop-list-item></a>
         </li>
@@ -142,19 +148,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         routeData: Object,
 
+        part: String,
+
+        <!-- [참고]2. 이 변수에 구분하는 값이 들어옴  -->
+        subrouteData: Object,
+
         visible: Boolean,
 
         offline: {
-          type: Boolean,
-          observer: '_offlineChanged'
+            type: Boolean,
+            observer: '_offlineChanged'
         },
 
         failure: Boolean
 
       },
 
+      <!-- [참고]3. subrouteData.part값이 변하면 _routePageChanged()를 호출  -->
       observers: [
-        '_categoryChanged(category, visible)'
+        '_categoryChanged(category, visible)',
+        '_routePageChanged(subrouteData.part)'
       ],
 
       _getListItems: function(items) {
@@ -166,6 +179,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // By returning null when `itemId` is undefined, the href attribute won't be set and
         // the link will be disabled.
         return item.name ? ['/detail', this.category.name, item.name].join('/') : null;
+      },
+
+      _getPartHref: function(part) {
+        //파트별(가수, 프로듀서 등) URL생성
+        return part ? ['/detail', this.category.name, part].join('/') : null;
       },
 
       _getPluralizedQuantity: function(quantity) {
@@ -180,25 +198,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (visible) {
           this.debounce('change-section', function() {
             // Notify the category and the page's title
-            this.fire('change-section', {
-              category: category.name,
-              title: category.title
-            });
+          this.fire('change-section', {
+            category: category.name,
+            title: category.title
           });
-        }
-      },
-
-      _tryReconnect: function() {
-        this.$.categoryData.refresh();
-      },
-
-      _offlineChanged: function(offline) {
-        if (!offline) {
-          this._tryReconnect();
-        }
+        });
       }
+    },
 
-    });
+    <!-- [참고]4. URL에 맞게 프로퍼티 세팅, 해당되는 것만 show  -->
+    _routePageChanged: function(part) {
+      this.part = part;
+    },
+
+    <!-- [참고]5. filter역할, item.part와 현재 URL의 part가 매칭되는 것이 있으면 true 반환   -->
+    matchPart: function(item) {
+      if(item && item.part && item.part.indexOf(this.part) !== -1) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
+    _tryReconnect: function() {
+      this.$.categoryData.refresh();
+    },
+
+    _offlineChanged: function(offline) {
+      if (!offline) {
+        this._tryReconnect();
+      }
+    }
+
+  });
 
   </script>
 
