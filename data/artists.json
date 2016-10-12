@@ -8,7 +8,8 @@
     "largeImage":"/data/member/tikkit.jpg",
     "description":"2013.12.20. 소울슈프림 'Chrismas baby'<br>2014.10.20. Young Man X TIKKIT 'BANG'<br>2015.04.13 Young Man X TIKKIT 'SHADOW GAME'<br>2015.05.29. TIKKIT - '뚜벅(prod by NOPARI)'<br>2016.01.22. TIKKIT - 'DREAM'<br>2016.04.29.TIKKIT - 'model'<br>",
     "career":"데뷔 : 2014년도 싱글앨범 'bang'",
-    "broadcast":"2012-2013 MBC 위대한탄생 시즌 생방송 진출 '소율슈프림'팀 리더"
+    "broadcast":"2012-2013 MBC 위대한탄생 시즌 생방송 진출 '소율슈프림'팀 리더",
+    "part":"singer,producer,dancer"
   },
   {
     "name":"YouTube+Ultimate+Hooded+Sweatshirt",
@@ -17,7 +18,8 @@
     "price":"",
     "description":"2015.04.15. 올루드(Allrude) - ‘Ma story in the..’<br>2016.05.13. 올루드(Allrude) - ‘In the lonely city’",
     "image":"/data/member/jidaejang.jpg",
-    "largeImage":"/data/member/jidaejang.jpg"
+    "largeImage":"/data/member/jidaejang.jpg",
+    "part":"singer"
   },
   {
     "name":"Vastrm+Hoodie",
@@ -26,7 +28,8 @@
     "price":"",
     "description":"2013 - 2014 스마트폰 어플리케이션 k-pop 댄스 콘텐츠 영상 촬영/편집<br>2014 KBSn sports 방송 프로그램 'WE GOT SOUL' 촬영 및 편집<br>RED BULL bc one seoul, busan 2014 촬영<br>전주 비보이 그랑프리 2014 촬영 2015 - 2016 뷰티 및 패션 웹전용 영상 제작<br>(엘르, 그라치아, 더 셀러브리티, 보그걸, 뷰티쁠, 에잇세컨즈) 2016 R.P - 내 여자보다 귀한것은 없네 (feat.정훈 of fameUS)M/V<br>TIKKIT – MODEL M/V 연출",
     "image":"/data/member/leejy.jpg",
-    "largeImage":"/data/member/leejy.jpg"
+    "largeImage":"/data/member/leejy.jpg",
+    "part":"dancer, videodirector"
   },
   {
     "name":"Men+s+Tech+Shell+Full-Zip",
@@ -35,7 +38,8 @@
     "price":"",
     "description":"2003 경기도 평택 댄스락 페스티벌 대상<br>2004 JCI 댄스 퍼포먼스 대상<br>2004 경기도 청소년 댄스경연대회 대상<br>2005 서울예술종합학교 주최 SAC 댄스경연대회 입상 2005 백제예술대학 주최 댄스페스티발 우수상<br>2005 여수 국제 청소년 댄스경연대회 우수상<br>2007 포항 전국 댄스퍼포먼스 최우수상<br>2013 THE POP CRAZY VOL.1 준우승<br>국회의원상, 시장상, 교육감상, 문화장관부상, 도지사상 등 수상<br>",
     "image":"/data/member/zillion.jpg",
-    "largeImage":"/data/member/zillion.jpg"
+    "largeImage":"/data/member/zillion.jpg",
+    "part":"dancer"
   },
   {
     "name":"Anvil+L+S+Crew+Neck+-+Grey",
@@ -44,7 +48,8 @@
     "price":"",
     "description":"2014 new skool battle alleyoop 2:2 우승 2015 hiphoper crew 우승<br>2015 세계대회 이탈이라 the week 준우승 2015 battle is over crew 우승<br>2015 flip over vol.1 힙합사이드 우승<br>2016 세계대회 funkinstylez 팀배틀 우승 (한국대표)<br>2012~2014 한림연예 예술 고등학교 힙합전공 수업<br>2013~2014 서울공연 예술 고등학교 실용무용과<br>2013~2014 (구)한국 콘서바토리(현)한국국제예술원 실용무용과 2015~현재 국제대학교 엔터이먼트 계열 실용무용과 2015~2016 명지대학교 실용무용과<br>2016~현재 상명대학교 실용무용과 힙합전공 심화과정 2016~현재 한국국제예술원 실용무용과<br>2007~현재 비트믹스 댄스 스튜디오",
     "image":"/data/member/kman.jpg",
-    "largeImage":"/data/member/kman.jpg"
+    "largeImage":"/data/member/kman.jpg",
+    "part":"dancer"
   },
   {
     "name":"Green+Flex+Fleece+Zip+Hoodie",
@@ -53,7 +58,8 @@
     "price":45.65,
     "description":"2013.09.09 HyEnD(YoungMan) – ‘Black&White‘<br>2014.04.13 YoungMan X TIKKIT - 'Shadow Game'<br>2014.10.20 YoungMan X TIKKIT - 'BANG'<br>2015.09.09 Young Man – ‘Shout Out’",
     "image":"/data/member/youngman.jpg",
-    "largeImage":"/data/member/youngman.jpg"
+    "largeImage":"/data/member/youngman.jpg",
+    "part":"singer,producer"
   },
   {
     "name":"Grey+Heather+Fleece+Zip+Hoodie",
@@ -62,7 +68,8 @@
     "price":"",
     "description":"2013.08.28. 플래티넘바 - 'That's it'<br>2014.10.14. KOK - '한뼘반'<br>2014.04.11. KOK - '손만잡고잘게'<br>2015.04.17. KOK - '아킬레스걸(feat.TIKKIT)'<br>2015.05.07. KOK - '2FACE'<br>2015.09.08. KOK - '지낼만해'",
     "image":"/data/member/frank.jpg",
-    "largeImage":"/data/member/frank.jpg"
+    "largeImage":"/data/member/frank.jpg",
+    "part":"dancer"
   }
 
 ]
