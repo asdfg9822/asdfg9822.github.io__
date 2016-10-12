@@ -116,7 +116,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     value: true
                 },
 
-                music: Array,
+                musicList: Array,
 
                 playingMusic: {
                     type: Object,
@@ -125,7 +125,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         "title":"Dream",
                         "singer":"Tikkit",
                         "coverImage":"/data/music/dream/tikkit.jpg",
-                        "music":"/data/music/dream/example.mp3"
+                        "music":"/data/music/dream/example.mp3",
+                        "index": 1
                     }
                 }
             },
@@ -152,11 +153,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             },
 
             _prevMusic: function() {
-
+                if(this.playingMusic.index > 0) {
+                    this.playingMusic = musicList[this.playingMusic.index-1];
+                    this.player.$.audio.play();
+                } else {
+                    this.player.$.audio.play();
+                }
             },
 
             _nextMusic: function() {
-
+                if(this.musicList.length > this.playingMusic.index) {
+                    this.playingMusic = musicList[this.playingMusic.index+1];
+                    this.player.$.audio.play();
+                } else {
+                    this.playingMusic = musicList[0];
+                    this.player.$.audio.play();
+                }
             }
         });
     </script>
