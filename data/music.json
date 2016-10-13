@@ -10,14 +10,14 @@
         "album":"Dream",
         "title":"Dream",
         "singer":"Tikkit",
-        "coverImage":"/data/music/dream/tikkit.jpg",
+        "coverImage":"/data/music/dream/frank.jpg",
         "music":"/data/music/dream/example.mp3"
     },
     {
         "album":"Dream",
         "title":"Dream",
         "singer":"Tikkit",
-        "coverImage":"/data/music/dream/tikkit.jpg",
+        "coverImage":"/data/music/dream/jidaejang.jpg",
         "music":"/data/music/dream/example.mp3"
     }
 ]

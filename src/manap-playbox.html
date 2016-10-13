@@ -32,11 +32,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 display: none !important;
             }
 
-            .cover {
+/*            .cover {
                 width: 30px;
                 height: 30px;
-                background-color: red;
                 margin-left: 11px;
+                background: url("/data/music/dream/tikkit.jpg") no-repeat 30px 30px;
+            }*/
+
+            #cover img {
+                margin-top: 6px;
+                width: 33px;
+                height: 33px;
+                border: 1px solid #eaeaea;
             }
 
             .music-info {
@@ -84,7 +91,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <paper-icon-button icon="av:play-arrow" class="playbox-icon" on-tap="_playPause" hidden$="{{!playing}}" ></paper-icon-button>
             <paper-icon-button icon="av:pause" class="playbox-icon" on-tap="_playPause" hidden$="{{playing}}" ></paper-icon-button>
             <paper-icon-button icon="av:skip-next" on-tap="_nextMusic" pconly></paper-icon-button>
-            <div class="cover"></div>
+            <div id="cover" style=""><img src="{{playingMusic.coverImage}}"/></div>
             <div class="music-info">
                 <div class="title">{{playingMusic.title}}</div>
                 <div class="album">{{playingMusic.album}}</div>
@@ -150,6 +157,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             _togglePlay: function() {
                 this.playing = !this.playing;
+            },
+
+            ready: function() {
+                this._syncMusic();
+            },
+
+            _syncMusic: function() {
+                //this.$.cover.style.backgroundImage = this.playingMusic.coverImage;
             },
 
             _prevMusic: function() {
