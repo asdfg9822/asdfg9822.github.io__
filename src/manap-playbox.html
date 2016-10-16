@@ -22,27 +22,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 right: 0;
                 width: 100%;
                 height: 50px;
-                background-color: #ffffff;
+                background-color: rgba(57, 57, 57, 0.95);
                 border-top: 1px solid rgba(0,0,0,.15);
             }
 
-            .playbox-icon[pconly] {
-                margin-left : 28px;
+            .icon {
+                padding: 6px;
+                color:white;
             }
-
-            :host([hidden]), [hidden] {
-                display: none !important;
-            }
-
-/*            .cover {
-                width: 30px;
-                height: 30px;
-                margin-left: 11px;
-                background: url("/data/music/dream/tikkit.jpg") no-repeat 30px 30px;
-            }*/
 
             #cover {
-                margin-left: 6px;
+                margin-left: 15px;
             }
 
             #cover img {
@@ -64,30 +54,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin: 0px;
                 padding: 0px;
                 line-height: 20px;
+                color:white;
             }
 
             .album {
                 color:#999;
                 font-size: 12px;
                 font-weight: 300;
-            }
-
-            @media (max-width: 767px) {
-
-                app-toolbar {
-                    /*@apply(--layout-fixed-bottom);*/
-                    background-color: #ffffff;
-                    height: 50px;
-                    z-index: 10;
-                }
-
-                paper-icon-button[pconly] {
-                    display: none;
-                }
-
-                .playbox-icon {
-                    margin-left : 28px;
-                }
             }
 
             #left {
@@ -110,24 +83,59 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 display:inline-block;
             }
 
+            @media (max-width: 767px) {
+
+                app-toolbar {
+                    /*@apply(--layout-fixed-bottom);*/
+                    height: 50px;
+                    z-index: 10;
+                }
+
+                paper-icon-button[pconly] {
+                    display: none;
+                }
+
+                .playbox-icon {
+                    margin-left : 30px;
+                }
+
+                #left > *[pconly] {
+                    display: none;
+                }
+
+                :host([pconly], [pconly]) {
+                    display: none !important;
+                }
+
+                #cover {
+                    margin-left:20px;
+                }
+            }
+
+            :host([hidden]), [hidden] {
+                display: none !important;
+            }
+
         </style>
 
         <app-toolbar>
             <div id="left">
-                <paper-icon-button icon="av:skip-previous" class="playbox-icon" on-tap="_prevMusic" pconly></paper-icon-button >
-                <paper-icon-button icon="av:play-arrow" class="playbox-icon" on-tap="_playPause" hidden$="{{!playing}}" ></paper-icon-button>
-                <paper-icon-button icon="av:pause" class="playbox-icon" on-tap="_playPause" hidden$="{{playing}}" ></paper-icon-button>
-                <paper-icon-button icon="av:skip-next" on-tap="_nextMusic" pconly></paper-icon-button>
+                <paper-icon-button icon="av:skip-previous" class="icon playbox-icon" on-tap="_prevMusic" style="margin-left : 28px;" pconly></paper-icon-button>
+                <paper-icon-button icon="av:play-arrow" class="icon playbox-icon" on-tap="_playPause" hidden$="{{!playing}}" pconly></paper-icon-button>
+                <paper-icon-button icon="av:pause" class="icon playbox-icon" on-tap="_playPause" hidden$="{{playing}}" pconly></paper-icon-button>
+                <paper-icon-button icon="av:skip-next" class="icon" on-tap="_nextMusic" pconly></paper-icon-button>
                 <div id="cover" style=""><img src="{{playingMusic.coverImage}}"/></div>
                 <div class="music-info">
-                    <div class="title">{{playingMusic.title}}</div>
+                    <div class="title">{{playingMusic.title}} - {{playingMusic.singer}}</div>
                     <div class="album">{{playingMusic.album}}</div>
                 </div>
                 <audio id="audio" src="{{playingMusic.music}}"></audio>
             </div>
-            <div class="">
+            <div class="right">
                 <a href="/cart" tabindex="-1">
-                    <paper-icon-button icon="editor:format-list-bulleted" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
+                    <paper-icon-button icon="av:play-circle-outline" class="icon playbox-icon" on-tap="_mplayPause" hidden$="{{!mplaying}}"></paper-icon-button>
+                    <paper-icon-button icon="av:pause-circle-filled" class="icon playbox-icon" on-tap="_mplayPause" hidden$="{{mplaying}}"></paper-icon-button>
+                    <paper-icon-button icon="editor:format-list-bulleted" class="icon" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
                 </a>
                 <div class="music-badge" aria-hidden="true" hidden$="[[!numItems]]">[[numItems]]</div>
             </div>
@@ -151,6 +159,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             properties: {
                 playing: {
+                    type: Boolean,
+                    notify: true,
+                    value: true
+                },
+
+                mplaying: {
                     type: Boolean,
                     notify: true,
                     value: true
@@ -188,8 +202,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
             },
 
+            _mplayPause: function(e) {
+                e.preventDefault();
+
+                var player = this;
+                player._mtogglePlay();
+
+                if ( player.$.audio.paused ) {
+                    player.$.audio.play();
+                } else {
+                    player.$.audio.pause();
+                }
+            },
+
             _togglePlay: function() {
                 this.playing = !this.playing;
+            },
+
+            _mtogglePlay: function() {
+                this.mplaying = !this.mplaying;
             },
 
             ready: function() {
