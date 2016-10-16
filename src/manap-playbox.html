@@ -83,13 +83,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 display:inline-block;
             }
 
+            .right > .icon {
+                display:none;
+            }
+
             @media (max-width: 767px) {
 
                 app-toolbar {
-                    /*@apply(--layout-fixed-bottom);*/
-                    height: 50px;
+                /*@apply(--layout-fixed-bottom);*/
+                height: 50px;
                     z-index: 10;
                 }
+
 
                 paper-icon-button[pconly] {
                     display: none;
@@ -110,7 +115,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 #cover {
                     margin-left:24px;
                 }
+                .right > .icon {
+                    display: inline-block;
+                }
             }
+
 
             :host([hidden]), [hidden] {
                 display: none !important;
@@ -119,7 +128,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </style>
 
         <app-toolbar>
-            <div id="left">
+            <div id="left" pconly>
                 <paper-icon-button icon="av:skip-previous" class="icon playbox-icon" on-tap="_prevMusic" style="margin-left : 28px;" pconly></paper-icon-button>
                 <paper-icon-button icon="av:play-arrow" class="icon playbox-icon" on-tap="_playPause" hidden$="{{!playing}}" pconly></paper-icon-button>
                 <paper-icon-button icon="av:pause" class="icon playbox-icon" on-tap="_playPause" hidden$="{{playing}}" pconly></paper-icon-button>
@@ -149,6 +158,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             is: 'manap-playbox',
 
             behaviors: [
+
             ],
 
             attributeChanged: function (name) {
