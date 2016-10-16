@@ -9,6 +9,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="../bower_components/iron-icons/av-icons.html">
 
 <dom-module id="manap-playbox">
     <template>
@@ -125,7 +127,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
             <div class="">
                 <a href="/cart" tabindex="-1">
-                    <paper-icon-button icon="hardware:headset-mic" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
+                    <paper-icon-button icon="editor:format-list-bulleted" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
                 </a>
                 <div class="music-badge" aria-hidden="true" hidden$="[[!numItems]]">[[numItems]]</div>
             </div>
