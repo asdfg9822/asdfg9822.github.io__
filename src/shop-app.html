@@ -86,7 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: none;
       }
 
-      .cart-btn-container {
+      .top-padding {
         position: relative;
         width: 40px;
       }
@@ -285,13 +285,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </a>
         </div>
         <div class="logo" main-title><a href="/" aria-label="SHOP Home">MANAP</a></div>
-        <div class="cart-btn-container">
+        <div class="top-padding"></div>
+        <!--<div class="cart-btn-container">
           <a href="/cart" tabindex="-1">
             <paper-icon-button icon="hardware:headset-mic" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
-            <!--<paper-icon-button id="music" icon="hardware:headset-mic" on-tap="togglePlaybox" alt="inbox"></paper-icon-button>-->
           </a>
           <div class="music-badge" aria-hidden="true" hidden$="[[!numItems]]">[[numItems]]</div>
-        </div>
+        </div>-->
       </app-toolbar>
 
       <!-- Lazy-create the tabs for larger screen sizes. -->
@@ -340,6 +340,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div class="demo-label" on-tap="handleTap">맨뒤</div>
       <manap-playbox id="playbox" hidden$="{{playbox}}" music="[[music]]" total="[[total]]"></manap-playbox>
       <manap-play-data id="music" music="{{music}}" num-items="{{numItems}}" total="{{total}}"></manap-play-data>
+
     </footer>
 
     <!-- a11y announcer -->
