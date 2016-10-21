@@ -137,7 +137,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-icon-button icon="av:play-arrow" class="icon playbox-icon" on-tap="_playPause" hidden$="{{playing}}" pconly></paper-icon-button>
                 <paper-icon-button icon="av:pause" class="icon playbox-icon" on-tap="_playPause" hidden$="{{!playing}}" pconly></paper-icon-button>
                 <paper-icon-button icon="av:skip-next" class="icon" on-tap="_nextMusic" pconly></paper-icon-button>
-                <paper-icon-button icon="av:shuffle" class="icon" pconly></paper-icon-button>
+                <paper-icon-button icon="av:shuffle" class="icon" on-tap="" pconly></paper-icon-button>
                 <div id="cover" style=""><img src="{{playingMusic.coverImage}}"/></div>
                 <div class="music-info">
                     <div class="title">{{playingMusic.title}} - {{playingMusic.singer}}</div>
@@ -201,7 +201,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 properties: {
                     playing: {
                         type: Boolean,
-                        notify: true,
                         value: false
                     },
 
@@ -214,6 +213,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     playingMusic: {
                         type: Object,
                         value: musicListValue[0]
+                    },
+
+                    random: {
+                        type: Boolean,
+                        value: false
                     }
                 },
 
@@ -261,6 +265,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                     player.$.audio.play();
                     this.playing = true;
+                },
+
+                _random: function() {
+                    this.musicList = _shuffle(this.musicList);
+                },
+
+                _shuffle: function (array) {
+                    var counter = array.length;
+
+                    // While there are elements in the array
+                    while (counter > 0) {
+                        // Pick a random index
+                        var index = Math.floor(Math.random() * counter);
+
+                        // Decrease counter by 1
+                        counter--;
+
+                        // And swap the last element with it
+                        var temp = array[counter];
+                        array[counter] = array[index];
+                        array[index] = temp;
+                    }
+
+                    return array;
                 }
             });
         })();
