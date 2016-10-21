@@ -49,11 +49,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 text-align: left;
             }
 
-            .music-info > div {
-                text-overflow: ellipsis;
-                overflow:hidden;
-            }
-
             .title {
                 font-size: 16px;
                 margin: 0px;
@@ -137,7 +132,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-icon-button icon="av:play-arrow" class="icon playbox-icon" on-tap="_playPause" hidden$="{{playing}}" pconly></paper-icon-button>
                 <paper-icon-button icon="av:pause" class="icon playbox-icon" on-tap="_playPause" hidden$="{{!playing}}" pconly></paper-icon-button>
                 <paper-icon-button icon="av:skip-next" class="icon" on-tap="_nextMusic" pconly></paper-icon-button>
-                <paper-icon-button icon="av:shuffle" class="icon" on-tap="" pconly></paper-icon-button>
                 <div id="cover" style=""><img src="{{playingMusic.coverImage}}"/></div>
                 <div class="music-info">
                     <div class="title">{{playingMusic.title}} - {{playingMusic.singer}}</div>
@@ -161,36 +155,84 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             var musicListValue = [
                 {
-                    "album":"DreamDreamDreamDreamDreamDreamDreamDreamDreamDreamDream",
-                    "title":"Dream",
-                    "singer":"1234567890abcdefghijkmlnopqrstuvwxyz1234567890abcdefghijkmlnopqrstuvwxyz",
-                    "coverImage":"/data/music/dream/frank.jpg",
-                    "music":"/data/music/dream/example.mp3",
-                    "index": 1
-                },
-                {
-                    "album":"Dream",
-                    "title":"Dream",
-                    "singer":"Tikkit",
-                    "coverImage":"/data/music/dream/dream.png",
-                    "music":"/data/music/dream/example.mp3",
+                    "album":"Bang",
+                    "title":"Bang",
+                    "singer":"Young Man X Tikkit",
+                    "coverImage":"/data/music/bang/cover.jpg",
+                    "music":"/data/music/bang/music.mp3",
                     "index": 0
                 },
                 {
                     "album":"Dream",
                     "title":"Dream",
                     "singer":"Tikkit",
-                    "coverImage":"/data/music/dream/frank.jpg",
-                    "music":"/data/music/dream/example.mp3",
+                    "coverImage":"/data/music/dream/cover.jpg",
+                    "music":"/data/music/dream/music.mp3",
                     "index": 1
                 },
                 {
-                    "album":"Dream",
-                    "title":"Dream",
+                    "album":"Model",
+                    "title":"Model",
                     "singer":"Tikkit",
-                    "coverImage":"/data/music/dream/jidaejang.jpg",
-                    "music":"/data/music/dream/example.mp3",
+                    "coverImage":"/data/music/model/cover.jpg",
+                    "music":"/data/music/model/music.mp3",
                     "index": 2
+                },
+                {
+                    "album":"Shadow Game",
+                    "title":"Shadow Game",
+                    "singer":"Young Man X Tikkit",
+                    "coverImage":"/data/music/shadowgame/cover.jpg",
+                    "music":"/data/music/shadowgame/music.mp3",
+                    "index": 3
+                },
+                {
+                    "album":"뚜벅뚜벅",
+                    "title":"뚜벅뚜벅",
+                    "singer":"Tikkit",
+                    "coverImage":"/data/music/walkwalk/cover.jpg",
+                    "music":"/data/music/walkwalk/music.mp3",
+                    "index": 4
+                },
+                {
+                    "album":"Shout Out",
+                    "title":"Shout Out",
+                    "singer":"Young Man",
+                    "coverImage":"/data/music/shoutout/cover.jpg",
+                    "music":"/data/music/shoutout/music.mp3",
+                    "index": 5
+                },
+                {
+                    "album":"Black & White",
+                    "title":"Black & White",
+                    "singer":"HyEnd",
+                    "coverImage":"/data/music/blackandwhite/cover.jpg",
+                    "music":"/data/music/blackandwhite/music.mp3",
+                    "index": 6
+                },
+                {
+                    "album":"In the lonely city",
+                    "title":"In the lonely city",
+                    "singer":"Allrude",
+                    "coverImage":"/data/music/inthelonelycity/cover.jpg",
+                    "music":"/data/music/inthelonelycity/music.mp3",
+                    "index": 7
+                },
+                {
+                    "album":"Ma story in the",
+                    "title":"Ma story in the",
+                    "singer":"Allrude",
+                    "coverImage":"/data/music/mastoryinthe/cover.jpg",
+                    "music":"/data/music/mastoryinthe/music.mp3",
+                    "index": 8
+                },
+                {
+                    "album":"테스트DreamDreamDreamDreamDreamDreamDreamDreamDreamDreamDream",
+                    "title":"테스트Dream테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트",
+                    "singer":"1234567890abcdefghijkmlnopqrstuvwxyz1234567890abcdefghijkmlnopqrstuvwxyz",
+                    "coverImage":"/data/music/walkwalk/cover.jpg",
+                    "music":"/data/music/walkwalk/music.mp3",
+                    "index": 9
                 }
             ];
 
@@ -201,6 +243,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 properties: {
                     playing: {
                         type: Boolean,
+                        notify: true,
                         value: false
                     },
 
@@ -219,6 +262,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         type: Boolean,
                         value: false
                     }
+                },
+
+                listeners: {
+                    'audio.ended': '_nextMusic'
                 },
 
                 _playPause: function(e) {
