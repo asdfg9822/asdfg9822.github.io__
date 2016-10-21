@@ -49,6 +49,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 text-align: left;
             }
 
+            .music-info > div {
+                text-overflow: ellipsis;
+                overflow:hidden;
+            }
+
             .title {
                 font-size: 16px;
                 margin: 0px;
@@ -132,6 +137,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-icon-button icon="av:play-arrow" class="icon playbox-icon" on-tap="_playPause" hidden$="{{playing}}" pconly></paper-icon-button>
                 <paper-icon-button icon="av:pause" class="icon playbox-icon" on-tap="_playPause" hidden$="{{!playing}}" pconly></paper-icon-button>
                 <paper-icon-button icon="av:skip-next" class="icon" on-tap="_nextMusic" pconly></paper-icon-button>
+                <paper-icon-button icon="av:shuffle" class="icon" pconly></paper-icon-button>
                 <div id="cover" style=""><img src="{{playingMusic.coverImage}}"/></div>
                 <div class="music-info">
                     <div class="title">{{playingMusic.title}} - {{playingMusic.singer}}</div>
