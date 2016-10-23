@@ -132,6 +132,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-icon-button icon="av:play-arrow" class="icon playbox-icon" on-tap="_playPause" hidden$="{{playing}}" pconly></paper-icon-button>
                 <paper-icon-button icon="av:pause" class="icon playbox-icon" on-tap="_playPause" hidden$="{{!playing}}" pconly></paper-icon-button>
                 <paper-icon-button icon="av:skip-next" class="icon" on-tap="_nextMusic" pconly></paper-icon-button>
+                <paper-icon-button icon="av:shuffle" class="icon" on-tap="_random" pconly></paper-icon-button>
                 <div id="cover" style=""><img src="{{playingMusic.coverImage}}"/></div>
                 <div class="music-info">
                     <div class="title">{{playingMusic.title}} - {{playingMusic.singer}}</div>
@@ -315,7 +316,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 },
 
                 _random: function() {
-                    this.musicList = _shuffle(this.musicList);
+                    this.musicList = this._shuffle(this.musicList);
                 },
 
                 _shuffle: function (array) {
