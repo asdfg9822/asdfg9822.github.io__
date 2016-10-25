@@ -55,8 +55,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <span>([[_getPluralizedQuantity(musicList.length)]])</span>
         </header>
         <div class="list">
-          <template is="dom-repeat" items="[[musicList]]" as="entry">
-            <shop-music-item entry="[[entry]]"></shop-music-item>
+          <template is="dom-repeat" items="[[musicList]]" as="music">
+            <shop-music-item music="[[music]]"></shop-music-item>
           </template>
         </div>
       </div>
@@ -66,6 +66,90 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
 
+
+    var musicListValue = [
+      {
+        "album":"Bang",
+        "title":"Bang",
+        "singer":"Young Man X Tikkit",
+        "coverImage":"/data/music/bang/cover.jpg",
+        "music":"/data/music/bang/music.mp3",
+        "index": 0
+      },
+      {
+        "album":"Dream",
+        "title":"Dream",
+        "singer":"Tikkit",
+        "coverImage":"/data/music/dream/cover.jpg",
+        "music":"/data/music/dream/music.mp3",
+        "index": 1
+      },
+      {
+        "album":"Model",
+        "title":"Model",
+        "singer":"Tikkit",
+        "coverImage":"/data/music/model/cover.jpg",
+        "music":"/data/music/model/music.mp3",
+        "index": 2
+      },
+      {
+        "album":"Shadow Game",
+        "title":"Shadow Game",
+        "singer":"Young Man X Tikkit",
+        "coverImage":"/data/music/shadowgame/cover.jpg",
+        "music":"/data/music/shadowgame/music.mp3",
+        "index": 3
+      },
+      {
+        "album":"뚜벅뚜벅",
+        "title":"뚜벅뚜벅",
+        "singer":"Tikkit",
+        "coverImage":"/data/music/walkwalk/cover.jpg",
+        "music":"/data/music/walkwalk/music.mp3",
+        "index": 4
+      },
+      {
+        "album":"Shout Out",
+        "title":"Shout Out",
+        "singer":"Young Man",
+        "coverImage":"/data/music/shoutout/cover.jpg",
+        "music":"/data/music/shoutout/music.mp3",
+        "index": 5
+      },
+      {
+        "album":"Black & White",
+        "title":"Black & White",
+        "singer":"HyEnd",
+        "coverImage":"/data/music/blackandwhite/cover.jpg",
+        "music":"/data/music/blackandwhite/music.mp3",
+        "index": 6
+      },
+      {
+        "album":"In the lonely city",
+        "title":"In the lonely city",
+        "singer":"Allrude",
+        "coverImage":"/data/music/inthelonelycity/cover.jpg",
+        "music":"/data/music/inthelonelycity/music.mp3",
+        "index": 7
+      },
+      {
+        "album":"Ma story in the",
+        "title":"Ma story in the",
+        "singer":"Allrude",
+        "coverImage":"/data/music/mastoryinthe/cover.jpg",
+        "music":"/data/music/mastoryinthe/music.mp3",
+        "index": 8
+      },
+      {
+        "album":"테스트DreamDreamDreamDreamDreamDreamDreamDreamDreamDreamDream",
+        "title":"테스트Dream테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트",
+        "singer":"1234567890abcdefghijkmlnopqrstuvwxyz1234567890abcdefghijkmlnopqrstuvwxyz",
+        "coverImage":"/data/music/walkwalk/cover.jpg",
+        "music":"/data/music/walkwalk/music.mp3",
+        "index": 9
+      }
+    ];
+
     Polymer({
 
       is: 'shop-musiclist',
@@ -74,7 +158,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         total: Number,
 
-        musicList: Array,
+        musicList: {
+          type: Array,
+          value: musicListValue
+        },
 
         visible: {
           type: Boolean,
@@ -86,15 +173,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           computed: '_computeHasItem(musicList.length)'
         }
 
-      },
-
-      setMusicList: function(e) {
-        console.log(this.music);
-        console.log(e);
-      },
-
-      attached: function() {
-        console.log(this.music);
       },
 
       _formatTotal: function(total) {

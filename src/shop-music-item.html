@@ -48,7 +48,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-weight: 500;
         float: left;
         width: calc(100% - 438px);
-        margin-top: 26px;
+        margin-top: 20px;
         margin-right: 30px;
       }
 
@@ -94,6 +94,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         position: absolute;
         top: 18px;
         right: 0;
+      }
+
+      .music-info {
+        vertical-align: middle;
+        margin-left: 12px;
+        line-height: 14px;
+        text-align: left;
+      }
+
+      .title {
+        font-size: 16px;
+        margin: 0px;
+        padding: 0px;
+        line-height: 20px;
+        color:black;
+      }
+
+      .album {
+        color:#999;
+        font-size: 12px;
+        font-weight: 300;
       }
 
       .flex {
@@ -171,7 +192,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </a>
     <div class="flex">
       <div class="name">
-        <a href$="/detail/[[music.item.category]]/[[music.item.name]]">[[music.title]]</a>
+        <div class="music-info">
+          <div class="title">[[music.title]] - [[music.singer]]</div>
+          <div class="album">[[music.album]]</div>
+        </div>
       </div>
     </div>
   </template>
@@ -186,6 +210,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         music: Object
 
+      },
+
+      attached: function() {
+        console.log(this.music);
       },
 
       _setCartItem: function(quantity) {

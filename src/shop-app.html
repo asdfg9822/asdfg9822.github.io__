@@ -405,7 +405,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _onSetMusicList: function() {
-        this.$.musiclist.setMusicList(this.musicList);
+        var musicList = this.$.musiclist;
+        musicList.setMusicList(this.musicList);
       },
 
       created: function() {
