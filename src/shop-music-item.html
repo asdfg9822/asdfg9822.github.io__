@@ -131,6 +131,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 20px;
       }
 
+      .gesture {
+        cursor: pointer;
+      }
+
       @media (max-width: 767px) {
         .flex {
           @apply(--layout-vertical);
@@ -187,42 +191,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </style>
 
-    <a href$="/detail/[[music.item.category]]/[[music.item.name]]" title$="[[music.title]]">
-      <shop-image src="[[music.coverImage]]" alt="[[music.title]]"></shop-image>
-    </a>
-    <div class="flex">
-      <div class="name">
-        <div class="music-info">
-          <div class="title">[[music.title]] - [[music.singer]]</div>
-          <div class="album">[[music.album]]</div>
+      <a href$="#" title$="[[music.title]]">
+        <shop-image src="[[music.coverImage]]" alt="[[music.title]]"></shop-image>
+      </a>
+    <div class="gesture" on-tap="_selectMusic">
+      <div class="flex">
+        <div class="name">
+          <div class="music-info">
+            <div class="title">[[music.title]] - [[music.singer]]</div>
+            <div class="album">[[music.album]]</div>
+          </div>
         </div>
       </div>
     </div>
   </template>
 
   <script>
-
     Polymer({
 
       is: 'shop-music-item',
 
       properties: {
-
         music: Object
-
       },
 
-      attached: function() {
-        console.log(this.music);
+      _selectMusic: function() {
+        this.fire('set-playing', this.music.index);
       },
-
-      _setCartItem: function(quantity) {
-        this.fire('set-cart-item', {
-          item: this.music.item
-        });
-      }
-
-
     });
 
   </script>

@@ -319,6 +319,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     this.playing = true;
                 },
 
+                setPlayingMusic: function(index) {
+                    var player = this;
+                    var musicList = this.musicList;
+                    for (var i=0; i<musicList.length; i++) {
+                        if (musicList[i].index === index) {
+                          this.playingMusic = this.musicList[i];
+                          player.$.audio.play();
+                          this.playing = true;
+                        }
+                    }
+                },
+
                 _random: function() {
                     this.musicList = this._shuffle(this.musicList);
                 },

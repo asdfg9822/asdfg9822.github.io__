@@ -401,12 +401,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         'change-section': '_onChangeSection',
         'announce': '_onAnnounce',
         'dom-change': '_domChange',
-        'set-musiclist': '_onSetMusicList'
+        'set-musiclist': '_onSetMusicList',
+        'set-playing': '_setPlayingMusic'
       },
 
       _onSetMusicList: function() {
         var musicList = this.$.musiclist;
         musicList.setMusicList(this.musicList);
+      },
+
+      _setPlayingMusic: function(event) {
+        this.$.playbox.setPlayingMusic(event.detail);
       },
 
       created: function() {
