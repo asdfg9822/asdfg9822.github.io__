@@ -88,8 +88,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       },
 
+      setMusicList: function(e) {
+        console.log(this.music);
+        console.log(e);
+      },
+
       attached: function() {
-        console.log(this.musicList);
+        console.log(this.music);
       },
 
       _formatTotal: function(total) {

@@ -329,7 +329,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <shop-detail name="detail" route="[[subroute]]" offline="[[offline]]"></shop-detail>
       <!-- cart view -->
       <shop-cart name="cart" cart="[[cart]]" total="[[total]]"></shop-cart>
-      <shop-musiclist name="musiclist" musicList="[[musicList]]" total="[[total]]"></shop-musiclist>
+      <shop-musiclist id="musiclist" name="musiclist" music="[[musicList]]" total="[[total]]"></shop-musiclist>
       <!-- checkout view -->
       <shop-checkout name="checkout" cart="[[cart]]" total="[[total]]" route="{{subroute}}"></shop-checkout>
     </iron-pages>
@@ -339,7 +339,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div class="demo-label" on-tap="handleTap">맨뒤</div>
       <manap-playbox id="playbox" hidden$="{{playbox}}" musicList="{{musicList}}" total="[[total]]"></manap-playbox>
       <manap-play-data id="music" musicList="[[musicList]]" num-items="{{numItems}}" total="{{total}}"></manap-play-data>
-
     </footer>
 
     <!-- a11y announcer -->
@@ -401,7 +400,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         'clear-cart': '_onClearCart',
         'change-section': '_onChangeSection',
         'announce': '_onAnnounce',
-        'dom-change': '_domChange'
+        'dom-change': '_domChange',
+        'set-musiclist': '_onSetMusicList'
+      },
+
+      _onSetMusicList: function() {
+        this.$.musiclist.setMusicList(this.musicList);
       },
 
       created: function() {
@@ -523,6 +527,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _onSetCartItem: function(event) {
         var detail = event.detail;
         this.$.cart.setItem(detail);
+        if (detail.quantity === 0) {
+          this._announce('Item deleted');
+        } else {
+          this._announce('Quantity changed to ' + detail.quantity);
+        }
+      },
+
+      _onSetCartItem: function(event) {
+        var detail = event.detail;
+        this.$.playlist.setItem(detail);
         if (detail.quantity === 0) {
           this._announce('Item deleted');
         } else {
