@@ -16,7 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <iron-localstorage
         name="manap-play-data"
-        value="{{music}}"
+        value="{{musicList}}"
         on-iron-localstorage-load-empty="_initializeMusic"></iron-localstorage>
   </template>
 
@@ -28,20 +28,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       properties: {
 
-        music: {
+        musicList: {
           type: Array,
           notify: true
         },
 
         numItems: {
           type: Number,
-          computed: '_computeNumItems(music.splices)',
+          computed: '_computeNumItems(musicList.splices)',
           notify: true
         },
 
         total: {
           type: Number,
-          computed: '_computeTotal(music.splices)',
+          computed: '_computeTotal(musicList.splices)',
           notify: true
         }
 
@@ -50,7 +50,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       addItem: function(detail) {
         var i = this._indexOfEntry(detail.item.name, detail.size);
         if (i !== -1) {
-          detail.quantity += this.music[i].quantity;
+          detail.quantity += this.musicList[i].quantity;
         }
         this.setItem(detail);
       },
@@ -58,28 +58,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       setItem: function(detail) {
         var i = this._indexOfEntry(detail.item.name, detail.size);
         if (detail.quantity === 0) {
-          // Remove item from music when the new quantity is 0.
+          // Remove item from musicList when the new quantity is 0.
           if (i !== -1) {
-            this.splice('music', i, 1);
+            this.splice('musicList', i, 1);
           }
         } else {
           // Use Polymer's array mutation methods (`splice`, `push`) so that observers
-          // on `music.splices` are triggered.
+          // on `musicList.splices` are triggered.
           if (i !== -1) {
-            this.splice('music', i, 1, detail);
+            this.splice('musicList', i, 1, detail);
           } else {
-            this.push('music', detail);
+            this.push('musicList', detail);
           }
         }
       },
 
       clearMusic: function() {
-        this.music = [];
+        this.musicList = [];
       },
 
       _computeNumItems: function() {
-        if (this.music) {
-          return this.music.reduce(function(total, entry) {
+        if (this.musicList) {
+          return this.musicList.reduce(function(total, entry) {
             return total + entry.quantity;
           }, 0);
         }
@@ -88,8 +88,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _computeTotal: function() {
-        if (this.music) {
-          return this.music.reduce(function(total, entry) {
+        if (this.musicList) {
+          return this.musicList.reduce(function(total, entry) {
             return total + entry.quantity * entry.item.price;
           }, 0);
         }
@@ -98,9 +98,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _indexOfEntry: function(name, size) {
-        if (this.music) {
-          for (var i = 0; i < this.music.length; ++i) {
-            var entry = this.music[i];
+        if (this.musicList) {
+          for (var i = 0; i < this.musicList.length; ++i) {
+            var entry = this.musicList[i];
             if (entry.item.name === name && entry.size === size) {
               return i;
             }

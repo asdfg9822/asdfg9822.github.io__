@@ -50,19 +50,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
       <div class="subsection" visible$="[[_hasItems]]">
         <header>
-          <h1>Your Cart</h1>
+          <h1>Your Playlist</h1>
           <span>([[_getPluralizedQuantity(cart.length)]])</span>
         </header>
         <div class="list">
           <template is="dom-repeat" items="[[cart]]" as="entry">
             <shop-cart-item entry="[[entry]]"></shop-cart-item>
           </template>
-        </div>
-        <div class="checkout-box">
-          Total: <span class="subtotal">[[_formatTotal(total)]]</span>
-          <shop-button responsive>
-            <a href="/checkout">Checkout</a>
-          </shop-button>
         </div>
       </div>
     </div>
@@ -102,7 +96,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _getPluralizedQuantity: function(quantity) {
-        return quantity + ' ' + (quantity === 1 ? 'item' : 'items');
+        return quantity + ' ' + (quantity === 1 ? 'music' : 'musics');
       },
 
       _visibleChanged: function(visible) {
