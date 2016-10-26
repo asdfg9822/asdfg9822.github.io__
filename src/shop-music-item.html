@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
 <link rel="import" href="shop-icons.html">
 <link rel="import" href="shop-image.html">
 <link rel="import" href="shop-select.html">
@@ -141,6 +142,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       @media (max-width: 767px) {
+        :host {
+          margin-bottom: 10px;
+        }
+
         .flex {
           @apply(--layout-vertical);
           margin-left: 10px;
@@ -251,6 +256,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
       </div>
     </div>
+    <paper-ripple recenters></paper-ripple>
   </template>
 
   <script>
