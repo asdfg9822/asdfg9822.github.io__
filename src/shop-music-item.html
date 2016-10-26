@@ -25,6 +25,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         @apply(--layout-horizontal);
         position: relative;
         margin-bottom: 24px;
+        background: rgba(238, 238, 238, 0.23);
+        padding: 5px 5px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
       }
 
       shop-image {
@@ -132,6 +136,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .gesture {
         cursor: pointer;
+        display: inline-flex;
+        width: 100%;
       }
 
       @media (max-width: 767px) {
@@ -232,10 +238,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </style>
 
+    <div class="gesture" on-tap="_selectMusic">
       <a href$="#" title$="[[music.title]]">
         <shop-image src="[[music.coverImage]]" alt="[[music.title]]"></shop-image>
       </a>
-    <div class="gesture" on-tap="_selectMusic">
       <div class="flex">
         <div class="name">
           <div class="music-info">
