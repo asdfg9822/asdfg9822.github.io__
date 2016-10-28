@@ -86,10 +86,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tail="{{subroute}}"></app-route>
 
     <!-- [참고]1. list/artists/{data}가 들어올 경우 data를 subrouteData.part에 담아줌  -->
-    <app-route
+<!--    <app-route
             route="[[subroute]]"
             pattern="/:part"
-            data="{{subrouteData}}"></app-route>
+            data="{{subrouteData}}"></app-route>-->
     <!--
       shop-category-data provides the category data for a given category name.
     -->
@@ -116,7 +116,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </header>
 
     <ul class="grid" hidden$="[[failure]]">
-      <template is="dom-repeat" items="[[_getListItems(category.items)]]" initial-count="4" filter="matchPart">
+      <!--<template is="dom-repeat" items="[[_getListItems(category.items)]]" initial-count="4" filter="matchPart">-->
+      <template is="dom-repeat" items="[[_getListItems(category.items)]]" initial-count="4" >
         <li>
           <a href$="[[_getItemHref(item)]]"><shop-list-item item="[[item]]"></shop-list-item></a>
         </li>
@@ -211,14 +212,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this.part = part;
     },
 
-    <!-- [참고]5. filter역할, item.part와 현재 URL의 part가 매칭되는 것이 있으면 true 반환   -->
+/*    <!-- [참고]5. filter역할, item.part와 현재 URL의 part가 매칭되는 것이 있으면 true 반환   -->
     matchPart: function(item) {
       if(item && item.part && item.part.indexOf(this.part) !== -1) {
         return true;
       } else {
         return false;
       }
-    },
+    },*/
 
     _tryReconnect: function() {
       this.$.categoryData.refresh();
