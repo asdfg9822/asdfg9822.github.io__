@@ -13,7 +13,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
 <link rel="import" href="shop-icons.html">
-<link rel="import" href="shop-image.html">
 <link rel="import" href="shop-select.html">
 
 <dom-module id="shop-music-item">
@@ -32,19 +31,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         border: 1px solid #ddd;
       }
 
+      :host([playing]) {
+        background: rgba(187, 87, 87, 0.16);
+      }
+
       shop-image {
         width: 72px;
         height: 72px;
-      }
-
-      shop-select > select {
-        font-size: 16px;
-        padding-left: 40px;
-      }
-
-      shop-select > shop-md-decorator {
-        font-size: 12px;
-        border: none;
       }
 
       .name {
@@ -65,40 +58,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-      }
-
-      .price, .size {
-        display: inline-block;
-        white-space: nowrap;
-        color: var(--app-secondary-color);
-      }
-
-      .size {
-        min-width: 70px;
-        width: 144px;
-      }
-
-      .size > span {
-        margin-left: 10px;
-      }
-
-      .price {
-        min-width: 70px;
-        width: 100px;
-      }
-
-      .quantity {
-        min-width: 80px;
-        width: 160px;
-      }
-
-      .delete-button {
-        width: 34px;
-        height: 34px;
-        color: var(--app-secondary-color);
-        position: absolute;
-        top: 18px;
-        right: 0;
       }
 
       .music-info {
@@ -162,20 +121,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           width: calc(100% + 1px);
         }
 
-        .detail {
-          @apply(--layout-self-end);
-          margin: 10px 10px 0 0;
-        }
-
-        .quantity, .size, .price {
-          text-align: right;
-          width: auto;
-        }
-
-        .delete-button {
-          top: 8px;
-        }
-
         .title {
           font-size: 14px;
           margin: 0px;
@@ -205,25 +150,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           height: 50px;
         }
 
-        .detail {
-          @apply(--layout-vertical);
-          @apply(--layout-start);
-          @apply(--layout-self-start);
-          height: auto;
-          margin-top: 0;
-        }
-
-        .delete-button {
-          top: -6px;
-        }
-
         shop-select > select {
           padding: 2px 24px 2px 40px;
-        }
-
-        .quantity, .size, .price {
-          text-align: left;
-          width: auto;
         }
 
         .title {
@@ -242,7 +170,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
     </style>
-
     <div class="gesture" on-tap="_selectMusic">
       <a href$="#" title$="[[music.title]]">
         <shop-image src="[[music.coverImage]]" alt="[[music.title]]"></shop-image>
@@ -265,7 +192,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'shop-music-item',
 
       properties: {
-        music: Object
+        music: Object,
+
+        playingMusic: {
+          type: Object,
+          observer: "isPlaying"
+        },
+      },
+
+      attached: function() {
+/*        console.log("ok");
+        this.isPlaying();*/
+      },
+
+      isPlaying: function() {
+        if(this.playingMusic.index === this.music.index) {
+          this.toggleAttribute("playing", true, this);
+        } else {
+          this.toggleAttribute("playing", false, this);
+        }
       },
 
       _selectMusic: function() {
