@@ -132,13 +132,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-icon-button icon="av:play-arrow" class="icon playbox-icon" on-tap="_playPause" hidden$="{{playing}}" pconly></paper-icon-button>
                 <paper-icon-button icon="av:pause" class="icon playbox-icon" on-tap="_playPause" hidden$="{{!playing}}" pconly></paper-icon-button>
                 <paper-icon-button icon="av:skip-next" class="icon" on-tap="_nextMusic" pconly></paper-icon-button>
-                <paper-icon-button icon="av:shuffle" class="icon" on-tap="_random" pconly></paper-icon-button>
+                <paper-icon-button id="shuffle" icon="av:shuffle" class="icon" on-tap="_random" pconly></paper-icon-button>
                 <div id="cover" style=""><img src="{{playingMusic.coverImage}}"/></div>
                 <div class="music-info">
                     <div class="title">{{playingMusic.title}} - {{playingMusic.singer}}</div>
                     <div class="album">{{playingMusic.album}}</div>
                 </div>
-                <audio id="audio" src="{{playingMusic.music}}"></audio>
+                <audio id="audio" src="{{playingMusic.music}}" preload="auto"></audio>
             </div>
             <div class="right">
                 <paper-icon-button icon="av:play-circle-outline" class="icon playbox-icon" on-tap="_playPause" hidden$="{{playing}}"></paper-icon-button>
