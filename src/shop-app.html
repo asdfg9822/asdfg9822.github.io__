@@ -329,7 +329,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <shop-detail name="detail" route="[[subroute]]" offline="[[offline]]"></shop-detail>
       <!-- cart view -->
       <shop-cart name="cart" cart="[[cart]]" total="[[total]]"></shop-cart>
-      <shop-musiclist id="musiclist" name="musiclist" music="[[musicList]]" total="[[total]]"></shop-musiclist>
+      <shop-musiclist id="musiclist" name="musiclist" music-list="[[musicList]]" total="[[total]]"></shop-musiclist>
       <!-- checkout view -->
       <shop-checkout name="checkout" cart="[[cart]]" total="[[total]]" route="{{subroute}}"></shop-checkout>
     </iron-pages>
@@ -337,7 +337,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <footer>
       <a href="https://www.polymer-project.org/1.0/toolbox/"></a>
       <div class="demo-label" on-tap="handleTap">맨뒤</div>
-      <manap-playbox id="playbox" hidden$="{{playbox}}" musicList="{{musicList}}" total="[[total]]"></manap-playbox>
+      <manap-playbox id="playbox" hidden$="{{playbox}}" music-list="{{musicList}}" total="[[total]]"></manap-playbox>
       <manap-play-data id="music" musicList="[[musicList]]" num-items="{{numItems}}" total="{{total}}"></manap-play-data>
     </footer>
 
@@ -371,6 +371,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: 0
         },
 
+        musicList: {
+          type: Object
+        },
+
         _shouldShowTabs: {
           computed: '_computeShouldShowTabs(page, smallScreen)'
         },
@@ -401,13 +405,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         'change-section': '_onChangeSection',
         'announce': '_onAnnounce',
         'dom-change': '_domChange',
-        'set-musiclist': '_onSetMusicList',
         'set-playing': '_setPlayingMusic'
-      },
-
-      _onSetMusicList: function() {
-        var musicList = this.$.musiclist;
-        musicList.setMusicList(this.musicList);
       },
 
       _setPlayingMusic: function(event) {
