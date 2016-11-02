@@ -181,10 +181,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-weight: bold;
       }
 
-      shop-cart-modal {
-        z-index: 2;
-      }
-
       app-drawer {
         z-index: 3;
       }
@@ -259,16 +255,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     -->
     <shop-category-data categories="{{categories}}"></shop-category-data>
 
-    <!--
-      shop-cart-data maintains the state of the user's shopping cart (in localstorage) and
-      calculates the total amount.
-    -->
-    <shop-cart-data
-        id="cart"
-        cart="{{cart}}"
-        num-items="{{numItems}}"
-        total="{{total}}"></shop-cart-data>
-
     <app-header role="navigation" id="header" effects="waterfall" condenses reveals>
       <app-toolbar>
         <div class="left-bar-item">
@@ -284,12 +270,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
         <div class="logo" main-title><a href="/" aria-label="SHOP Home">MANAP</a></div>
         <div class="top-padding"></div>
-        <!--<div class="cart-btn-container">
-          <a href="/cart" tabindex="-1">
-            <paper-icon-button icon="hardware:headset-mic" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
-          </a>
-          <div class="music-badge" aria-hidden="true" hidden$="[[!numItems]]">[[numItems]]</div>
-        </div>-->
       </app-toolbar>
 
       <!-- Lazy-create the tabs for larger screen sizes. -->
@@ -327,11 +307,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <shop-list name="list" route="[[subroute]]" offline="[[offline]]"></shop-list>
       <!-- detail view of one item -->
       <shop-detail name="detail" route="[[subroute]]" offline="[[offline]]"></shop-detail>
-      <!-- cart view -->
-      <shop-cart name="cart" cart="[[cart]]" total="[[total]]"></shop-cart>
+      <!-- musiclist view -->
       <shop-musiclist id="musiclist" name="musiclist" music-list="[[musicList]]" playing-music="{{playingMusic}}" total="[[total]]"></shop-musiclist>
-      <!-- checkout view -->
-      <shop-checkout name="checkout" cart="[[cart]]" total="[[total]]" route="{{subroute}}"></shop-checkout>
     </iron-pages>
 
     <footer>
@@ -365,11 +342,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           observer: '_pageChanged'
         },
 
-        numItems: {
-          type: Number,
-          value: 0
-        },
-
         musicList: {
           type: Object
         },
@@ -398,9 +370,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ],
 
       listeners: {
-        'add-cart-item': '_onAddCartItem',
-        'set-cart-item': '_onSetCartItem',
-        'clear-cart': '_onClearCart',
         'change-section': '_onChangeSection',
         'announce': '_onAnnounce',
         'dom-change': '_domChange',
@@ -499,8 +468,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
       togglePlaybox: function() {
-        //this.playbox = !this.playbox;
-
         this.$.playbox.animate();
       },
 
@@ -514,42 +481,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           document.title = detail.title + ' - MANAP';
           this._announce(detail.title + ', loaded');
         }
-      },
-
-      _onAddCartItem: function(event) {
-        if (!this._cartModal) {
-          this._cartModal = document.createElement('shop-cart-modal');
-          Polymer.dom(this.root).appendChild(this._cartModal);
-        }
-        this.$.cart.addItem(event.detail);
-        this._cartModal.open();
-        this._announce('Item added to the List');
-
-      },
-
-      _onSetCartItem: function(event) {
-        var detail = event.detail;
-        this.$.cart.setItem(detail);
-        if (detail.quantity === 0) {
-          this._announce('Item deleted');
-        } else {
-          this._announce('Quantity changed to ' + detail.quantity);
-        }
-      },
-
-      _onSetCartItem: function(event) {
-        var detail = event.detail;
-        this.$.playlist.setItem(detail);
-        if (detail.quantity === 0) {
-          this._announce('Item deleted');
-        } else {
-          this._announce('Quantity changed to ' + detail.quantity);
-        }
-      },
-
-      _onClearCart: function() {
-        this.$.cart.clearCart();
-        this._announce('Cart cleared');
       },
 
       // Elements in the app can notify a change to be a11y announced.
