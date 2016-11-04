@@ -11,7 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="shop-category-data.html">
+<link rel="import" href="manap-category-data.html">
 <link rel="import" href="manap-common-styles.html">
 <link rel="import" href="shop-image.html">
 <link rel="import" href="shop-list-item.html">
@@ -93,11 +93,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!--
       shop-category-data provides the category data for a given category name.
     -->
-    <shop-category-data
+    <manap-category-data
         id="categoryData"
         category-name="[[routeData.category]]"
         category="{{category}}"
-        failure="{{failure}}"></shop-category-data>
+        failure="{{failure}}"></manap-category-data>
 
     <shop-image
         alt="[[category.title]]"
