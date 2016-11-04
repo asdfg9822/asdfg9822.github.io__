@@ -372,7 +372,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       listeners: {
         'change-section': '_onChangeSection',
         'announce': '_onAnnounce',
-        'dom-change': '_domChange',
+        /*'dom-change': '_domChange',*/
         'set-playing': '_setPlayingMusic'
       },
 
@@ -381,7 +381,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       created: function() {
-        window.performance && performance.mark && performance.mark('shop-app.created');
+        //window.performance && performance.mark && performance.mark('shop-app.created');
         // Custom elements polyfill safe way to indicate an element has been upgraded.
         this.removeAttribute('unresolved');
       },
@@ -496,6 +496,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }, 100);
       },
 
+      /*
       // This is for performance logging only.
       _domChange: function(e) {
         if (window.performance && performance.mark && !this.__loggedDomChange) {
@@ -505,7 +506,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             performance.mark(target.domHost.is + '.domChange');
           }
         }
-      },
+      },*/
 
       _computeShouldShowTabs: function(page, smallScreen) {
         return (page === 'home' || page === 'list' || page === 'detail') && !smallScreen;
@@ -517,10 +518,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _computeShouldRenderDrawer: function(smallScreen, loadComplete) {
         return smallScreen && loadComplete;
-      },
-
-      _computePluralizedQuantity: function(quantity) {
-        return quantity + ' ' + (quantity === 1 ? 'item' : 'items');
       }
 
     });
