@@ -111,31 +111,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         placeholder-img="[[category.placeholder]]" class="hero-image"></shop-image>
 
     <header>
-      <h1>[[category.title]]</h1>
+      <!--<h1>[[category.title]]</h1>-->
       <!--<a href="/list/artists/singer"><span>Singer</span></a>
       <a href="/list/artists/dancer"><span>Dancer</span></a>
       <a href="/list/artists/photographer"><span>Photographer</span></a>
       <a href="/list/artists/actor"><span>Actor</span></a>
       <a href="/list/artists/videodirector"><span>Video Director</span></a>
       <br>-->
-      <shop-md-decorator aria-hidden="true">
-        <shop-underline></shop-underline>
-      </shop-md-decorator>
-      <shop-select>
-        <label id="sizeLabel" prefix>Category</label>
-        <select id="sizeSelect" aria-labelledby="sizeLabel">
-          <option value="all" selected>ALL</option>
-          <option value="singer">Singer</option>
-          <option value="dancer" >Dancer</option>
-          <option value="producer">Producer</option>
-          <option value="photographer">Photographer</option>
-          <option value="actor">Actor</option>
-          <option value="videodirector">Video Director</option>
-        </select>
-        <shop-md-decorator aria-hidden="true">
-          <shop-underline></shop-underline>
-        </shop-md-decorator>
-      </shop-select>
+      <div style="text-align:left;">
+        <shop-select>
+          <label id="sizeLabel" prefix>Category</label>
+          <select id="sizeSelect" aria-labelledby="sizeLabel">
+            <option value="all" selected>ALL</option>
+            <option value="singer">Singer</option>
+            <option value="dancer" >Dancer</option>
+            <option value="producer">Producer</option>
+            <option value="photographer">Photographer</option>
+            <option value="actor">Actor</option>
+            <option value="videodirector">Video Director</option>
+          </select>
+          <shop-md-decorator aria-hidden="true">
+            <shop-underline></shop-underline>
+          </shop-md-decorator>
+        </shop-select>
+      </div>
       <br>
       <span>[[_getPluralizedQuantity(category.items.length)]]</span>
     </header>
