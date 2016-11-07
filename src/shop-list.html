@@ -63,6 +63,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         text-decoration: none;
       }
 
+      .pc_left_mo_right {
+        text-align: left;
+      }
+
       shop-select > select {
         /*font-size: 16px;*/
         padding: 16px 24px 13px 82px;
@@ -71,6 +75,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       @media (max-width: 767px) {
         .hero-image {
           display: none;
+        }
+
+        .pc_left_mo_right {
+          text-align: center;
         }
 
         .grid  li {
@@ -118,7 +126,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <a href="/list/artists/actor"><span>Actor</span></a>
       <a href="/list/artists/videodirector"><span>Video Director</span></a>
       <br>-->
-      <div style="text-align:left;">
+      <div class="pc_left_mo_right"">
         <shop-select>
           <label id="sizeLabel" prefix>Category</label>
           <select id="sizeSelect" aria-labelledby="sizeLabel">
