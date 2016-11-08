@@ -17,7 +17,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="shop-list-item.html">
 <link rel="import" href="shop-select.html">
 
-<dom-module id="shop-list">
+<dom-module id="manap-news">
 
   <template>
 
@@ -57,7 +57,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         flex-basis: 33%;
         max-width: 33%;
       }
-      
+
       .grid a {
         display:block;
         text-decoration: none;
@@ -94,29 +94,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app-route provides the name of the category.
     -->
     <app-route
-        route="[[route]]"
-        pattern="/:category"
-        data="{{routeData}}"
-        tail="{{subroute}}"></app-route>
+            route="[[route]]"
+            pattern="/:category"
+            data="{{routeData}}"
+            tail="{{subroute}}"></app-route>
 
     <!-- [참고]1. list/artists/{data}가 들어올 경우 data를 subrouteData.part에 담아줌  -->
-<!--    <app-route
-            route="[[subroute]]"
-            pattern="/:part"
-            data="{{subrouteData}}"></app-route>-->
+    <!--    <app-route
+                route="[[subroute]]"
+                pattern="/:part"
+                data="{{subrouteData}}"></app-route>-->
     <!--
       shop-category-data provides the category data for a given category name.
     -->
     <manap-category-data
-        id="categoryData"
-        category-name="[[routeData.category]]"
-        category="{{category}}"
-        failure="{{failure}}"></manap-category-data>
+            id="categoryData"
+            category-name="[[routeData.category]]"
+            category="{{category}}"
+            failure="{{failure}}"></manap-category-data>
 
     <shop-image
-        alt="[[category.title]]"
-        src="[[category.image]]"
-        placeholder-img="[[category.placeholder]]" class="hero-image"></shop-image>
+            alt="[[category.title]]"
+            src="[[category.image]]"
+            placeholder-img="[[category.placeholder]]" class="hero-image"></shop-image>
 
     <header>
       <!--<h1>[[category.title]]</h1>-->
@@ -155,15 +155,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </li>
       </template>
     </ul>
-    
+
     <!--
       shop-network-warning shows a warning message when the items can't be rendered due
       to network conditions.
     -->
     <shop-network-warning
-        hidden$="[[!failure]]"
-        offline="[[offline]]"
-        on-try-reconnect="_tryReconnect"></shop-network-warning>
+            hidden$="[[!failure]]"
+            offline="[[offline]]"
+            on-try-reconnect="_tryReconnect"></shop-network-warning>
 
   </template>
 
@@ -171,7 +171,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     Polymer({
 
-      is: 'shop-list',
+      is: 'manap-news',
 
       properties: {
 
@@ -189,8 +189,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         visible: Boolean,
 
         offline: {
-            type: Boolean,
-            observer: '_offlineChanged'
+          type: Boolean,
+          observer: '_offlineChanged'
         },
 
         failure: Boolean
@@ -231,39 +231,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (visible) {
           this.debounce('change-section', function() {
             // Notify the category and the page's title
-          this.fire('change-section', {
-            category: category.name,
-            title: category.title
+            this.fire('change-section', {
+              category: category.name,
+              title: category.title
+            });
           });
-        });
-      }
-    },
+        }
+      },
 
-    <!-- [참고]4. URL에 맞게 프로퍼티 세팅, 해당되는 것만 show  -->
+      <!-- [참고]4. URL에 맞게 프로퍼티 세팅, 해당되는 것만 show  -->
 //    _routePageChanged: function(part) {
 //      this.part = part;
 //    },
 
-/*    <!-- [참고]5. filter역할, item.part와 현재 URL의 part가 매칭되는 것이 있으면 true 반환   -->
-    matchPart: function(item) {
-      if(item && item.part && item.part.indexOf(this.part) !== -1) {
-        return true;
-      } else {
-        return false;
+      /*    <!-- [참고]5. filter역할, item.part와 현재 URL의 part가 매칭되는 것이 있으면 true 반환   -->
+       matchPart: function(item) {
+       if(item && item.part && item.part.indexOf(this.part) !== -1) {
+       return true;
+       } else {
+       return false;
+       }
+       },*/
+
+      _tryReconnect: function() {
+        this.$.categoryData.refresh();
+      },
+
+      _offlineChanged: function(offline) {
+        if (!offline) {
+          this._tryReconnect();
+        }
       }
-    },*/
 
-    _tryReconnect: function() {
-      this.$.categoryData.refresh();
-    },
-
-    _offlineChanged: function(offline) {
-      if (!offline) {
-        this._tryReconnect();
-      }
-    }
-
-  });
+    });
 
   </script>
 
