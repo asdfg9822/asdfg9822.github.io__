@@ -248,6 +248,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         data="{{routeData}}"
         tail="{{subroute}}"></app-route>
 
+    <app-route
+            route="{{subroute}}"
+            pattern="/:id"
+            data="{{subrouteData}}">
+    </app-route>
+
     <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
 
     <!--
@@ -366,7 +372,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       observers: [
-        '_routePageChanged(routeData.page)'
+        '_routePageChanged(subrouteData.id)'
       ],
 
       listeners: {
@@ -395,7 +401,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _routePageChanged: function(page) {
-        this.page = page || 'home';
+        this.page = this.routeData.page || 'home';
         // Scroll to the top of the page on every *route* change. Use `Polymer.AppLayout.scroll`
         // with `behavior: 'silent'` to disable header scroll effects during the scroll.
         Polymer.AppLayout.scroll({ top: 0, behavior: 'silent' });
@@ -404,11 +410,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _pageChanged: function(page, oldPage) {
+        debugger;
         if (page != null) {
           // home route is eagerly loaded
           if (page == 'home') {
             this._pageLoaded(Boolean(oldPage));
           // other routes are lazy loaded
+          } else if(page == 'list' && this.subrouteData.id  == 'news'){
+
+            var me = this;
+
+            this.importHref(
+                    this.resolveUrl('manap-' + me.subrouteData.id + '.html'),
+                    function() {
+                      this._pageLoaded(Boolean(oldPage));
+                    }, null, true);
           } else {
             this.importHref(
               this.resolveUrl('shop-' + page + '.html'),
