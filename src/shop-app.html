@@ -243,16 +243,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     -->
     <app-location route="{{route}}"></app-location>
     <app-route
-        route="{{route}}"
-        pattern="/:page"
-        data="{{routeData}}"
-        tail="{{subroute}}"></app-route>
-
-    <app-route
-            route="{{subroute}}"
-            pattern="/:id"
-            data="{{subrouteData}}">
-    </app-route>
+            route="{{route}}"
+            pattern="/:page"
+            data="{{routeData}}"
+            tail="{{subroute}}"></app-route>
 
     <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
 
@@ -282,8 +276,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div id="tabContainer" sticky$="[[_shouldShowTabs]]" hidden$="[[!_shouldShowTabs]]">
         <template is="dom-if" if="[[_shouldRenderTabs]]">
           <shop-tabs
-              selected="[[categoryName]]"
-              attr-for-selected="name">
+                  selected="[[categoryName]]"
+                  attr-for-selected="name">
             <template is="dom-repeat" items="[[categories]]" as="category" initial-count="4">
               <shop-tab name="[[category.name]]">
                 <a href="/list/[[category.name]]">[[category.title]]</a>
@@ -372,7 +366,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       observers: [
-        '_routePageChanged(subrouteData.id)'
+        '_routePageChanged(routeData.page)'
       ],
 
       listeners: {
@@ -401,7 +395,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _routePageChanged: function(page) {
-        this.page = this.routeData.page || 'home';
+        this.page = page || 'home';
         // Scroll to the top of the page on every *route* change. Use `Polymer.AppLayout.scroll`
         // with `behavior: 'silent'` to disable header scroll effects during the scroll.
         Polymer.AppLayout.scroll({ top: 0, behavior: 'silent' });
@@ -410,27 +404,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _pageChanged: function(page, oldPage) {
-        debugger;
         if (page != null) {
           // home route is eagerly loaded
           if (page == 'home') {
             this._pageLoaded(Boolean(oldPage));
-          // other routes are lazy loaded
-          } else if(page == 'list' && this.subrouteData.id  == 'news'){
-
-            var me = this;
-
+            // other routes are lazy loaded
+          } else {
             this.importHref(
-                    this.resolveUrl('manap-' + me.subrouteData.id + '.html'),
+                    this.resolveUrl('shop-' + page + '.html'),
                     function() {
                       this._pageLoaded(Boolean(oldPage));
                     }, null, true);
-          } else {
-            this.importHref(
-              this.resolveUrl('shop-' + page + '.html'),
-              function() {
-                this._pageLoaded(Boolean(oldPage));
-              }, null, true);
           }
         }
       },
@@ -473,7 +457,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             Polymer.dom(this.root).appendChild(this._networkSnackbar);
           }
           Polymer.dom(this._networkSnackbar).innerHTML = this.offline ?
-              'You are offline' : 'You are online';
+                  'You are offline' : 'You are online';
           this._networkSnackbar.open();
         }
       },
@@ -501,28 +485,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       // Elements in the app can notify a change to be a11y announced.
       /*_onAnnounce: function(e) {
-        this._announce(e.detail);
-      },
+       this._announce(e.detail);
+       },
 
-      // A11y announce the given message.
-      _announce: function(message) {
-        this._a11yLabel = '';
-        this.debounce('_a11yAnnouncer', function() {
-          this._a11yLabel = message;
-        }, 100);
-      },*/
+       // A11y announce the given message.
+       _announce: function(message) {
+       this._a11yLabel = '';
+       this.debounce('_a11yAnnouncer', function() {
+       this._a11yLabel = message;
+       }, 100);
+       },*/
 
       /*
-      // This is for performance logging only.
-      _domChange: function(e) {
-        if (window.performance && performance.mark && !this.__loggedDomChange) {
-          var target = Polymer.dom(e).rootTarget;
-          if (target.domHost.is.match(this.page)) {
-            this.__loggedDomChange = true;
-            performance.mark(target.domHost.is + '.domChange');
-          }
-        }
-      },*/
+       // This is for performance logging only.
+       _domChange: function(e) {
+       if (window.performance && performance.mark && !this.__loggedDomChange) {
+       var target = Polymer.dom(e).rootTarget;
+       if (target.domHost.is.match(this.page)) {
+       this.__loggedDomChange = true;
+       performance.mark(target.domHost.is + '.domChange');
+       }
+       }
+       },*/
 
       _computeShouldShowTabs: function(page, smallScreen) {
         return (page === 'home' || page === 'list' || page === 'detail') && !smallScreen;
@@ -537,8 +521,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
     });
-
-
 
 
   </script>
