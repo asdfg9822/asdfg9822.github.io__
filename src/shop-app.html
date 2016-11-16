@@ -411,10 +411,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             // other routes are lazy loaded
           } else {
             this.importHref(
-                    this.resolveUrl('shop-' + page + '.html'),
-                    function() {
-                      this._pageLoaded(Boolean(oldPage));
-                    }, null, true);
+                this.resolveUrl('shop-' + page + '.html'),
+                function() {
+                  this._pageLoaded(Boolean(oldPage));
+                }, null, true);
           }
         }
       },
