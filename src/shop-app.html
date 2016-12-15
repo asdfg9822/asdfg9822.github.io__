@@ -311,7 +311,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <manap-contact name="contact" route="[[subroute]]" offline="[[offline]]"></manap-contact>
 
       <!-- detail view of one item -->
-      <s name="detail" route="[[subroute]]" offline="[[offline]]"></s>
+      <manap-detail name="detail" route="[[subroute]]" offline="[[offline]]"></manap-detail>
       <!-- musiclist view -->
       <manap-musiclist id="musiclist" name="musiclist" music-list="[[musicList]]" playing-music="{{playingMusic}}" total="[[total]]"></manap-musiclist>
     </iron-pages>
@@ -430,6 +430,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             // other routes are lazy loaded
           } else {
             var secondRouteData = this.route.path ? this.route.path.split('/')[2] : "artists";
+
+            if(this.page == 'detail') {
+              secondRouteData = "detail";
+            }
 
             //route page loaded & trigger secondRouteData
             this.importHref(
