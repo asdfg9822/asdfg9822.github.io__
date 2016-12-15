@@ -14,10 +14,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="manap-category-data.html">
 <link rel="import" href="manap-common-styles.html">
 <link rel="import" href="shop-image.html">
-<link rel="import" href="shop-list-item.html">
+<link rel="import" href="manap-artists-item.html">
 <link rel="import" href="shop-select.html">
 
-<dom-module id="shop-list">
+<dom-module id="manap-artists">
 
   <template>
 
@@ -151,7 +151,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <!--<template is="dom-repeat" items="[[_getListItems(category.items)]]" initial-count="4" filter="matchPart">-->
       <template is="dom-repeat" items="[[_getListItems(category.items)]]" initial-count="4" >
         <li>
-          <a href$="[[_getItemHref(item)]]"><shop-list-item item="[[item]]"></shop-list-item></a>
+          <a href$="[[_getItemHref(item)]]"><manap-artists-item item="[[item]]"></manap-artists-item></a>
         </li>
       </template>
     </ul>
@@ -171,7 +171,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     Polymer({
 
-      is: 'shop-list',
+      is: 'manap-artists',
 
       properties: {
 

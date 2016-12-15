@@ -21,8 +21,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="manap-category-data.html">
 <!-- Since 'home' is the default route, eagerly load it. -->
-<link rel="import" href="shop-home.html">
+<link rel="import" href="manap-home.html">
 <link rel="import" href="manap-playbox.html">
+
 <dom-module id="shop-app">
 
   <template>
@@ -300,15 +301,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </app-drawer>
     </template>
 
-    <iron-pages role="main" selected="[[page]]" attr-for-selected="name" selected-attribute="visible">
+    <iron-pages role="main" selected="[[secondRouteData]]" attr-for-selected="name" selected-attribute="visible">
       <!-- home view -->
-      <shop-home name="home" categories="[[categories]]"></shop-home>
+      <manap-home name="home" categories="[[categories]]"></manap-home>
       <!-- list view of items in a category -->
-      <shop-list name="list" route="[[subroute]]" offline="[[offline]]"></shop-list>
+      <manap-artists name="artists" route="[[subroute]]" offline="[[offline]]"></manap-artists>
+      <manap-news name="news" route="[[subroute]]" offline="[[offline]]"></manap-news>
+      <manap-sns name="sns" route="[[subroute]]" offline="[[offline]]"></manap-sns>
+      <manap-contact name="contact" route="[[subroute]]" offline="[[offline]]"></manap-contact>
+
       <!-- detail view of one item -->
-      <shop-detail name="detail" route="[[subroute]]" offline="[[offline]]"></shop-detail>
+      <s name="detail" route="[[subroute]]" offline="[[offline]]"></s>
       <!-- musiclist view -->
-      <shop-musiclist id="musiclist" name="musiclist" music-list="[[musicList]]" playing-music="{{playingMusic}}" total="[[total]]"></shop-musiclist>
+      <manap-musiclist id="musiclist" name="musiclist" music-list="[[musicList]]" playing-music="{{playingMusic}}" total="[[total]]"></manap-musiclist>
     </iron-pages>
 
     <footer>
@@ -338,8 +343,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         page: {
           type: String,
+          reflectToAttribute: true
+        },
+
+        route: {
+          type: String,
           reflectToAttribute: true,
           observer: '_pageChanged'
+        },
+
+        secondRouteData: {
+          type: String,
+          reflectToAttribute: true
         },
 
         musicList: {
@@ -404,15 +419,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _pageChanged: function(page, oldPage) {
-        if (page != null) {
+        var me = this;
+
+        if (this.page != null) {
           // home route is eagerly loaded
-          if (page == 'home') {
+          if (this.page == 'home') {
             this._pageLoaded(Boolean(oldPage));
+
+            this.secondRouteData = "home";
             // other routes are lazy loaded
           } else {
+            var secondRouteData = this.route.path ? this.route.path.split('/')[2] : "artists";
+
+            //route page loaded & trigger secondRouteData
             this.importHref(
-                this.resolveUrl('shop-' + page + '.html'),
+                this.resolveUrl('manap-' + secondRouteData + '.html'),
                 function() {
+                  me.secondRouteData = secondRouteData; //trigger 'reflectToAttribute'
                   this._pageLoaded(Boolean(oldPage));
                 }, null, true);
           }
