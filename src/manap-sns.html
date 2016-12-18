@@ -11,11 +11,59 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="manap-category-data.html">
+<link rel="import" href="manap-common-styles.html">
+<link rel="import" href="shop-image.html">
+<link rel="import" href="manap-artists-item.html">
+<link rel="import" href="shop-select.html">
 
 <dom-module id="manap-sns">
 
   <template>
-sns page
+    <style include="manap-common-styles shop-select">
+      .hero-image {
+        position: relative;
+        height: 320px;
+        overflow: hidden;
+        margin-bottom: 32px;
+      }
+
+      .hero-image {
+        --shop-image-img: {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: -9999px;
+          right: -9999px;
+          max-width: none;
+        };
+      }
+
+      @media (max-width: 767px) {
+        .hero-image {
+          display: none;
+        }
+      }
+    </style>
+    <!--
+     app-route provides the name of the category.
+   -->
+    <app-route
+            route="[[route]]"
+            pattern="/:category"
+            data="{{routeData}}"
+            tail="{{subroute}}"></app-route>
+
+    <manap-category-data
+            id="categoryData"
+            category-name="[[routeData.category]]"
+            category="{{category}}"
+            failure="{{failure}}"></manap-category-data>
+
+    <shop-image
+            alt="[[category.title]]"
+            src="[[category.image]]"
+            placeholder-img="[[category.placeholder]]" class="hero-image"></shop-image>
 
   </template>
 
@@ -27,8 +75,34 @@ sns page
 
       properties: {
 
-      }
+        category: Object,
 
+        route: Object,
+
+        routeData: Object,
+
+        visible: Boolean,
+
+        failure: Boolean
+
+      },
+
+      <!-- [참고]3. subrouteData.part값이 변하면 _routePageChanged()를 호출  -->
+      observers: [
+        '_categoryChanged(category, visible)'
+      ],
+
+      _categoryChanged: function(category, visible) {
+        if (visible) {
+          this.debounce('change-section', function() {
+            // Notify the category and the page's title
+            this.fire('change-section', {
+              category: category.name,
+              title: category.title
+            });
+          });
+        }
+      }
 
     });
 
