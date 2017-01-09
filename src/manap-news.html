@@ -16,6 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="shop-image.html">
 <link rel="import" href="manap-artists-item.html">
 <link rel="import" href="shop-select.html">
+<link rel="import" href="manap-news-table.html">
 
 <dom-module id="manap-news">
 
@@ -64,7 +65,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             alt="[[category.title]]"
             src="[[category.image]]"
             placeholder-img="[[category.placeholder]]" class="hero-image"></shop-image>
-
+	
+	<manap-news-table></manap-news-table>
   </template>
 
   <script>
