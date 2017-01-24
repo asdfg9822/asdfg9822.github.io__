@@ -1,24 +1,62 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
 
 <dom-module id="manap-news-item">
 
   <template>
     <style>
-	
+      paper-card {
+        width: 330px;
+        max-height: 230px;
+        margin-right:10px;
+        margin-bottom:15px;
+        color:black;
+        cursor:pointer;
+      }
+      .card-content{
+        height:20px;
+        text-overflow:ellipsis;
+        overflow:hidden;
+        width:90%;
+      }
     </style>
 
-	<a href="#">{{newsData.name}}</a>
-	<br/>
+    <iron-ajax
+		auto
+		url="{{requestUrl}}"
+		handle-as="text"
+		on-response="getImageByTitle"></iron-ajax>
+
+    <paper-card image="{{img}}" alt="{{newsData.name}}" image-height="127">
+      <div class="card-content">
+        {{newsData.name}}
+      </div>
+      <div class="card-actions">
+        <paper-button>Show Details</paper-button>
+      </div>
+    </paper-card>
+    
   </template>
 
   <script>
-
     Polymer({
 
       is: 'manap-news-item',
-
+      ready: function() {
+        this.requestUrl = 'https://raw.githubusercontent.com/manapofficial/manapofficial.github.io/master/'+this.newsData.path
+      },
       properties: {
         
+      },
+      getImageByTitle : function(data){
+        parser = new DOMParser();
+        this.img = parser.parseFromString(data.detail.response,'text/html');
+        this.img = this.img.querySelector('title');
+        this.img = this.img.innerText;
       }
     });
 
