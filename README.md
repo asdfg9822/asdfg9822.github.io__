@@ -21,7 +21,7 @@ Install [polymer-cli](https://github.com/Polymer/polymer-cli):
     polymer serve
 
 ### Run web-component-tester tests
-
+  
     polymer test
 
 ### Build
